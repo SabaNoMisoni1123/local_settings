@@ -77,7 +77,7 @@ pyenv install --list
 
 ```
 python -m pip install --upgrade pip
-pip install -r ~/linuxSettings/pip_standard.txt
+pip install -r ~/local_settings/pip_standard.txt
 ```
 
 ### python-lsp-server
@@ -85,7 +85,7 @@ pip install -r ~/linuxSettings/pip_standard.txt
 LSP設定ファイルを所定のディレクトリにコピー
 
 ```
-cp ~/linuxSettings/pycodestyle ~/.config/
+cp ~/local_settings/pycodestyle ~/.config/
 ```
 
 ## Neovimのインストール
@@ -493,7 +493,7 @@ sudo apt install autoconf # なんか必要らしい
 ./autogen.sh
 ./configure --prefix=/usr/local # defaults to /usr/local
 make
-make install # may require extra privileges depending on where to install
+sudo make install # may require extra privileges depending on where to install
 ```
 macだとbrewで簡単インストール
 ```

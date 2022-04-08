@@ -11,6 +11,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if type pyenv > /dev/null; then
   eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
 fi
 
 
@@ -81,8 +82,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # path=================================
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/appimages:$PATH"
-export PATH="$HOME/linuxSettings/script:$PATH"
-chmod +x $HOME/linuxSettings/script/*.sh
+export PATH="$HOME/local_settings/script:$PATH"
+chmod +x $HOME/local_settings/script/*.sh
 export NEXTWORD_DATA_PATH=~/appimages/nextword-data
 
 
