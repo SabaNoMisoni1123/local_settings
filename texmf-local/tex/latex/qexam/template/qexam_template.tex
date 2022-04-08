@@ -1,0 +1,73 @@
+\documentclass[11pt,a4j]{jarticle}  
+% qexam_template.tex - 試験問題のひな形
+% 2009-07-11 Taku Yamanaka (Physics Dept., Osaka Univ.)
+% 2019-06-20 Taku: Updated for v2.0.
+
+%-------- page style ----------------------
+%\usepackage[a4paper]{geometry}
+%\usepackage[a4paper,text={17cm,25cm},centering]{geometry}	% to expand the text area
+
+%\pagestyle{empty}		% suppresses page numbering
+
+%--------- users packages ---------------
+%% AMS math package
+%\usepackage{amsmath}
+%% eps ファイルを読み込むためのパッケージ
+\usepackage{graphicx}
+%\usepackage{bm} % for vectors in bold math
+%\usepackage{udline} % for underlines crossing multiple lines
+
+\usepackage{qexam} %試験問題用パッケージ
+
+%====================================
+\begin{document}
+%% 和文フォントをゴシック体に変更する。
+%% 明朝体でいいときは、コメントアウトする。
+%\fontfamily{gt}
+%\selectfont
+%%%%
+
+%\renewcommand{\questionFormat}[1]{%
+%% Here are some examples.  Tune them as you like.
+%%	\textbf{\Large{#1}}
+%%	\framebox{\LARGE{#1}}
+%%	\hspace{-5mm}\textbf{\Huge{[#1]}}
+%%	\begin{center}{\textbf{\LARGE{#1}}}\end{center}
+%}
+
+%% 問1用のヘディング%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+	\textbf{\Large  qexam.sty による\\
+	\bigskip
+	物理学　試験問題}\\
+	\bigskip
+	\textbf{\large 2999年9月9日}
+\end{center}
+
+問題1から問題2までのすべての問題に解答せよ。
+解答用紙は問題ごとに1枚とし，それぞれに氏名・受験番号・問題番号を書くこと。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\question{問1}
+地の文。
+\begin{qlist}
+	\qitem 小問
+	\qitem 小問
+\end{qlist}
+
+\begin{qparts}
+	\qpart パート１
+		\begin{qlist}
+			\qitem 小問
+			\qitem 小問
+		\end{qlist}
+	\qpart パート２
+		\begin{qlist}
+			\qitem 小問
+			\qitem 次の\qbox{(a) -- (b)}を埋めよ。\\
+				この \qbox{}埋め 問題に箱は \qbox{}個ある。
+		\end{qlist}
+\end{qparts}
+
+\end{document}
+

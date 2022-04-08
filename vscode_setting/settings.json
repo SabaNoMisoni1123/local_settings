@@ -1,0 +1,56 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "window.zoomLevel": 2,
+    "editor.quickSuggestions": true,
+    "editor.suggest.showVariables": false,
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "trailing",
+    "editor.acceptSuggestionOnEnter": "off",
+
+    "editor.fontSize": 12,
+    "editor.minimap.enabled": false,
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/skondo/appimages/nvim.appimage",
+    "vscode-neovim.neovimInitVimPaths.linux": "/home/skondo/.config/nvim/init.vim",
+    "vscode-neovim.logLevel": "warn",
+    "vscode-neovim.logOutputToConsole": true,
+
+    "dictCompletion.externalUserDictFiles": [
+        "/usr/share/dict/words"
+    ],
+
+    "latex-workshop.latex.outDir": "./out/",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latex dvipdf",
+            "tools": ["dvipdf"]
+        },
+        {
+            "name": "latex pdf",
+            "tools": ["pdf"]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "dvipdf",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdfdvi",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "pdf",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "--pdf",
+                "%DOC%"
+            ]
+        }
+    ]
+}

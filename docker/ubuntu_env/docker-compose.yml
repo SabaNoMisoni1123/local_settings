@@ -1,0 +1,10 @@
+version: "3"
+services:
+  ubuntu:
+    build: .
+    restart: always
+    container_name: "ubuntu_cont"
+    working_dir: "/root/"
+    command: "/bin/zsh"
+    platform: linux/amd64
+    tty: true

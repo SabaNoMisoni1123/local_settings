@@ -1,0 +1,11 @@
+version: "3"
+services:
+  app:
+    build: .
+    restart: always
+    container_name: "python_cont"
+    working_dir: "/root/"
+    platform: linux/amd64
+    volumes:
+      - /local/path:/container/path
+    tty: true

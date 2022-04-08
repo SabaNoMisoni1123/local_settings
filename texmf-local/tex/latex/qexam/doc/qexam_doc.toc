@@ -1,0 +1,34 @@
+\contentsline {section}{\numberline {1}{\tt qexam.sty}関係のファイル}{3}% 
+\contentsline {section}{\numberline {2}使い方}{3}% 
+\contentsline {subsection}{\numberline {2.1}{\bf qexam}パッケージを読み込む}{3}% 
+\contentsline {subsection}{\numberline {2.2}大問}{3}% 
+\contentsline {subsection}{\numberline {2.3}小問}{3}% 
+\contentsline {subsection}{\numberline {2.4}小問の参照}{4}% 
+\contentsline {subsection}{\numberline {2.5}小問の中の問題(微小問?)}{4}% 
+\contentsline {subsection}{\numberline {2.6}中問}{5}% 
+\contentsline {subsection}{\numberline {2.7}穴埋め問題}{6}% 
+\contentsline {subsection}{\numberline {2.8}図や表のキャプション}{6}% 
+\contentsline {section}{\numberline {3}フォーマットの調整}{8}% 
+\contentsline {subsection}{\numberline {3.1}印刷する領域の変更}{8}% 
+\contentsline {subsection}{\numberline {3.2}ページ番号を入れない場合}{8}% 
+\contentsline {subsection}{\numberline {3.3}大問と同じ行に地の文を続ける場合}{8}% 
+\contentsline {subsection}{\numberline {3.4}大問のフォーマット}{8}% 
+\contentsline {subsubsection}{\numberline {3.4.1}〔 〕で囲む場合}{9}% 
+\contentsline {subsubsection}{\numberline {3.4.2}四角で囲む場合}{9}% 
+\contentsline {subsubsection}{\numberline {3.4.3}少し左に寄せ、大きく、[ ]で囲む場合}{9}% 
+\contentsline {subsubsection}{\numberline {3.4.4}センタリングする場合}{10}% 
+\contentsline {subsection}{\numberline {3.5}中問のフォーマット}{10}% 
+\contentsline {subsubsection}{\numberline {3.5.1}アラビア数字で}{10}% 
+\contentsline {subsubsection}{\numberline {3.5.2}アルファベットで大きく}{11}% 
+\contentsline {subsection}{\numberline {3.6}小問のprefix}{11}% 
+\contentsline {subsection}{\numberline {3.7}微小問のprefix}{11}% 
+\contentsline {subsection}{\numberline {3.8}全体を通して(微)小問のフォーマットを変える場合}{12}% 
+\contentsline {subsection}{\numberline {3.9}中問の前のスペース}{13}% 
+\contentsline {subsection}{\numberline {3.10}小問のリストの上下のスペース}{13}% 
+\contentsline {subsection}{\numberline {3.11}微小問のリストの上下のスペース}{13}% 
+\contentsline {section}{\numberline {4}Some tips}{14}% 
+\contentsline {subsection}{\numberline {4.1}ベクトル}{14}% 
+\contentsline {subsection}{\numberline {4.2}下線}{14}% 
+\contentsline {subsection}{\numberline {4.3}PDFの図を取り込む}{14}% 
+\contentsline {subsection}{\numberline {4.4}図を２つ横に並べる}{15}% 
+\contentsline {section}{\numberline {5}法的云々}{15}% 

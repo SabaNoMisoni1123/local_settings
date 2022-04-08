@@ -1,0 +1,10 @@
+version: "3"
+services:
+  cpplang:
+    build: .
+    restart: always
+    container_name: "c_cpp_cont"
+    working_dir: "/root/"
+    command: "/bin/zsh"
+    platform: linux/amd64
+    tty: true

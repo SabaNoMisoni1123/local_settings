@@ -1,0 +1,5 @@
+pipenv
+neovim
+python-lsp-server[all]
+python-lsp-black
+pyls-isort

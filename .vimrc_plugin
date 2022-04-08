@@ -1,0 +1,679 @@
+" key mapping
+
+let mapleader = "\<Space>"
+let maplocalleader = "\\"
+
+filetype plugin indent on
+syntax enable
+set conceallevel=0
+
+" file exprole
+noremap <leader>d   :Explore %:h<CR>
+noremap <leader>n   :Ve %:h<CR>
+nnoremap st         :tab sp<CR>:Explore %:h<CR>
+
+function! s:Netrw_mymap()
+  nmap <buffer> h -
+  nmap <buffer> l <CR>
+endfunction
+
+" move to the end of a text after copying/pasting it
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
+" Space+something to move to an end
+noremap <Space>h ^
+noremap <Space>l $
+noremap <Space>k gg
+noremap <Space>j G
+
+" unmap s,space
+nnoremap s <Nop>
+nnoremap <Space> <Nop>
+" window control
+nnoremap ss :split<CR>
+nnoremap sv :vsplit<CR>
+" st is used by defx
+nnoremap sc :tab sp<CR>
+nnoremap sC :-tab sp<CR>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+nnoremap sH <C-w>H
+nnoremap sZ :top terminal<CR>
+nnoremap sn gt
+nnoremap sp gT
+nnoremap s= <C-w>=
+nnoremap sO <C-w>=
+nnoremap so <C-w>_<C-w>\|
+nnoremap sq :<C-u>tabc<CR>
+
+" move by display line
+noremap j  gj
+noremap k  gk
+noremap gj j
+noremap gk k
+
+" add space
+inoremap , ,<Space>
+
+" do not copy when deleting by x
+nnoremap x "_x
+
+" quit by q
+tnoremap <silent> <Space>q  <C-\><C-n>:q<CR>
+nnoremap <silent> <Space>q  :q<CR>
+nnoremap <silent> <Space>wq :qa<CR>
+nnoremap <silent> <Space>Q  :qa<CR>
+
+" center cursor when jumped
+nnoremap m jzz
+nnoremap M kzz
+
+" increase and decrease by plus/minus
+nnoremap +  <C-a>
+nnoremap -  <C-x>
+vmap     g+ g<C-a>
+vmap     g- g<C-x>
+
+
+" save with <C-g> in insert mode
+inoremap <C-g> <ESC>:update<CR>a
+
+"save by <Space>s
+nnoremap <silent> <Space>s :w<CR>
+
+"reload init.vim
+nnoremap <silent> <leader>r :<C-u>so ~/.vimrc<CR>
+
+" one push to add/remove tabs
+nnoremap > >>
+nnoremap < <<
+" select again after tab action
+vnoremap > >gv
+vnoremap < <gv
+
+inoremap <silent>jj <ESC>
+nnoremap O ko<ESC>
+
+" if you can't type quickly, change this.
+set timeoutlen=400
+
+" update quickly
+set updatetime=100
+
+" show cursor line
+set cursorline
+
+" do not include buffer info in session
+set sessionoptions-=buffers
+
+" file encoding
+set encoding=utf-8 fileencodings=utf-8,ios-2022-jp,euc-jp,sjis,cp932
+
+set nf=alpha,octal,hex,bin
+
+" search settings
+set ignorecase
+set smartcase
+set incsearch
+set nohlsearch
+set nowrapscan
+
+" line number settings
+" set number
+set relativenumber
+set numberwidth=3
+set signcolumn=yes
+
+" always show finetabline,statusline
+set showtabline=2 laststatus=2
+
+" tab settings
+" set tabstop=4 shiftwidth=4
+set tabstop=2 shiftwidth=2
+set smarttab smartindent expandtab
+
+setlocal formatoptions+=mM
+
+" don't fold by default
+set foldlevel=99
+" reserve two columns for fold
+set foldcolumn=2
+
+" listchar settings
+set list listchars=tab:»-,trail:~,extends:»,precedes:«,nbsp:%
+
+" show double width characters properly
+set ambiwidth=double
+
+augroup fileType
+  autocmd!
+  autocmd filetype           python   setlocal tabstop=4 shiftwidth=4 foldmethod=syntax expandtab
+  autocmd filetype           c,cpp    setlocal tabstop=2 shiftwidth=2 foldmethod=syntax expandtab
+  autocmd filetype           go       setlocal tabstop=4 shiftwidth=4 expandtab | set formatoptions+=r
+  autocmd filetype           tex      setlocal tabstop=2 shiftwidth=2 foldmethod=syntax expandtab wrap conceallevel=0
+  autocmd filetype           html     setlocal tabstop=2 shiftwidth=2 expandtab nowrap
+  autocmd filetype           css      setlocal tabstop=2 shiftwidth=2 expandtab nowrap
+  autocmd filetype           vim      setlocal tabstop=2 shiftwidth=2 expandtab nowrap
+  autocmd filetype           csv      setlocal tabstop=4 shiftwidth=4 nowrap noexpandtab
+  autocmd filetype           text     setlocal tabstop=4 shiftwidth=4 expandtab
+  autocmd filetype           help     setlocal listchars=tab:\ \  noet
+  autocmd filetype           markdown setlocal tabstop=4 shiftwidth=4 expandtab wrap
+  autocmd BufNewFile,BufRead *.grg    setlocal nowrap
+  autocmd BufNewFile,BufRead *.jl     setf julia
+  autocmd BufNewFile,BufRead *.plt    setfiletype gnuplot
+  autocmd BufNewFile,BufRead *.m      setfiletype matlab
+  autocmd BufNewFile,BufRead *.csv    setfiletype csv
+  autocmd BufNewFile,BufRead *.toml   setfiletype conf
+  autocmd filetype           netrw    call s:Netrw_mymap()
+augroup END
+
+augroup Binary
+    au!
+    au BufReadPre  *.bin let &bin=1
+
+    au BufReadPost *.bin if &bin | %!xxd
+    au BufReadPost *.bin set ft=xxd | endif
+
+    au BufWritePre *.bin if &bin | %!xxd -r
+    au BufWritePre *.bin endif
+
+    au BufWritePost *.bin if &bin | %!xxd
+    au BufWritePost *.bin set nomod | endif
+augroup END
+
+augroup pcap
+    au!
+    au BufReadPre  *.pcap let &bin=1
+
+    au BufReadPost *.pcap if &bin | %!xxd
+    au BufReadPost *.pcap set ft=xxd | endif
+
+    au BufWritePre *.pcap if &bin | %!xxd -r
+    au BufWritePre *.pcap endif
+
+    au BufWritePost *.pcap if &bin | %!xxd
+    au BufWritePost *.pcap set nomod | endif
+augroup END
+
+
+set backspace=eol,indent,start
+
+set wildmenu
+set wildmode=list:full
+set wildignore=*.o,*.obj,*.pyc,*.so,*.dll
+
+let g:python_highlight_all = 1
+
+set clipboard+=unnamedplus
+
+" use termdebug
+packadd termdebug
+
+set mouse=a
+
+set splitbelow
+set splitright
+
+" word border
+set iskeyword+=-
+
+" no sound
+set belloff=all
+
+" netrw
+let g:netrw_liststyle=1
+let g:netrw_sizestyle="H"
+let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
+let g:netrw_preview=1
+
+" plugin settings
+let s:cache_home = expand('~/.vim')
+let s:dein_dir = s:cache_home . '/dein'
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+if !isdirectory(s:dein_repo_dir)
+  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+endif
+let &runtimepath = s:dein_repo_dir .",". &runtimepath
+
+let g:dein#types#git#clone_depth = 1
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  call dein#add('Shougo/dein.vim')
+  call dein#add('vim-denops/denops.vim')
+
+  call dein#add('kana/vim-operator-user')
+  call dein#add('rhysd/vim-operator-surround')
+  call dein#add('kana/vim-textobj-user')
+
+  call dein#add('kana/vim-textobj-syntax')
+  call dein#add('thinca/vim-textobj-between')
+  call dein#add('osyo-manga/vim-textobj-multiblock')
+  call dein#add('kana/vim-textobj-entire')
+
+  call dein#add('junegunn/vim-easy-align')
+  call dein#add('fuenor/jpmoveword.vim')
+  call dein#add('cohama/lexima.vim')
+  call dein#add('Shougo/context_filetype.vim')
+
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('t9md/vim-quickhl.git')
+
+  call dein#add('Shougo/ddc.vim')
+  call dein#add('Shougo/ddc-matcher_head')
+  call dein#add('matsui54/ddc-matcher_fuzzy')
+  call dein#add('Shougo/ddc-sorter_rank')
+  call dein#add('Shougo/ddc-around')
+  call dein#add('matsui54/ddc-buffer')
+  call dein#add('LumaKernel/ddc-file')
+  call dein#add('matsui54/ddc-dictionary')
+  call dein#add('shun/ddc-vim-lsp')
+
+  call dein#add('Shougo/ddu.vim')
+  call dein#add('Shougo/ddu-ui-ff')
+  call dein#add('Shougo/ddu-ui-filer')
+  call dein#add('Shougo/ddu-source-file_rec')
+  call dein#add('Shougo/ddu-source-line')
+  call dein#add('Shougo/ddu-source-file_old')
+  call dein#add('matsui54/ddu-source-command_history')
+  call dein#add('Shougo/ddu-kind-file')
+  call dein#add('Shougo/ddu-filter-matcher_substring')
+
+  call dein#add('Shougo/neosnippet')
+  call dein#add('Shougo/neosnippet-snippets')
+
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
+
+  call dein#add('Shougo/deol.nvim')
+  call dein#add('soramugi/auto-ctags.vim')
+  call dein#add('majutsushi/tagbar.git')
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('Yggdroot/indentLine')
+
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('nanotech/jellybeans.vim')
+
+  call dein#add('prabirshrestha/vim-lsp')
+  call dein#add('mattn/vim-lsp-settings')
+  call dein#add('mattn/vim-lsp-icons')
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+if has('vim_starting') && dein#check_install()
+  call dein#install()
+endif
+
+" plugin mappings
+
+" operator mappings
+map        <silent>sa             <Plug>(operator-surround-append)
+map        <silent>sd             <Plug>(operator-surround-delete)
+map        <silent>sr             <Plug>(operator-surround-replace)
+omap       ab                     <Plug>(textobj-multiblock-a)
+omap       ib                     <Plug>(textobj-multiblock-i)
+vmap       ab                     <Plug>(textobj-multiblock-a)
+vmap       ib                     <Plug>(textobj-multiblock-i)
+
+" if you use vim-textobj-multiblock
+nmap <silent>sdd <Plug>(operator-surround-delete)<Plug>(textobj-multiblock-a)
+nmap <silent>srr <Plug>(operator-surround-replace)<Plug>(textobj-multiblock-a)
+
+" if you use vim-textobj-between
+nmap <silent>sdb <Plug>(operator-surround-delete)<Plug>(textobj-between-a)
+nmap <silent>srb <Plug>(operator-surround-replace)<Plug>(textobj-between-a)
+
+" textobj
+let g:textobj_entire_no_default_key_mappings = 1
+omap av <Plug>(textobj-entire-a)
+omap iv <Plug>(textobj-entire-i)
+xmap av <Plug>(textobj-entire-a)
+xmap iv <Plug>(textobj-entire-i)
+
+" vim-easy-align
+xmap gga :Tabular
+xmap ga  <Plug>(EasyAlign)
+
+" nerdcommenter
+let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign='left'
+let g:NERDCustomDelimiters = {'vim': {'left': '"','right':''}}
+let g:NERDCreateDefaultMappings=0
+map <Leader>c<space> <plug>NERDCommenterToggle
+
+"  vim-quickhl
+nmap <leader>m <Plug>(quickhl-manual-this)
+xmap <leader>m <Plug>(quickhl-manual-this)
+nmap <leader>M <Plug>(quickhl-manual-reset)
+xmap <leader>M <Plug>(quickhl-manual-reset)
+
+" ddc
+call ddc#custom#patch_global('sources', ['vim-lsp', 'around', 'neosnippet', 'buffer', 'file'])
+setlocal dictionary+=/usr/share/dict/words
+
+call ddc#custom#set_context('*', { ->
+  \ ddc#syntax#in('Comment') ? {
+  \   'sources': ['around', 'buffer', 'file', 'dictionary'],
+  \ } : {} })
+
+call ddc#custom#patch_filetype(["text", "markdown"], 'sources', ['around', 'dictionary', 'buffer', 'file'])
+
+call ddc#custom#patch_global('sourceOptions', {
+    \ 'file': { 'mark': 'F', 'forceCompletionPattern': '\S/\S*'},
+    \ 'vim-lsp': { 'mark': 'lsp'},
+    \ 'around': { 'mark': 'A' },
+    \ 'buffer': { 'mark': 'B' },
+    \ 'ultisnips': { 'mark': 'US'},
+    \ 'neosnippet': { 'mark': 'NS', 'dup': v:true},
+    \ 'dictionary': { 'mark': 'D' },
+    \ '_': { 'matchers': ['matcher_fuzzy'],
+    \        'sorters':  ['sorter_rank'],
+    \        'ignoreCase': v:true},
+    \ })
+
+call ddc#custom#patch_global('sourceParams', {
+    \ 'nvim-lsp': { 'kindLabels': { 'Class': 'c' } },
+    \ 'buffer': {'requireSameFiletype': v:false},
+    \ 'dictionary': {
+    \ 'dictPaths': ['/usr/share/dict/words'],
+    \ 'smartCase': v:true,
+    \ },
+    \ })
+
+call ddc#custom#patch_global({
+  \ 'backspaceCompletion': v:true,
+  \ })
+
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? '<C-n>' :
+\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+\ '<TAB>' : ddc#map#manual_complete()
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+
+call ddc#enable()
+
+" ddu
+call ddu#custom#patch_global({
+      \ 'ui': 'ff',
+      \ 'uiParams': {
+        \ 'ff':{
+          \ 'split':  'horizontal',
+          \ 'startFilter':  v:true,
+        \ },
+        \ 'filer':{
+          \ 'split':  'no',
+          \ 'winWidth':  &columns / 4,
+        \ },
+      \ },
+      \ 'sourceOptions': {
+        \ '_': {
+          \ 'matchers': ['matcher_substring'],
+          \ },
+        \ },
+      \ 'kindOptions': {
+        \ 'file': {
+          \ 'defaultAction': 'open',
+          \ },
+        \ 'command_history': {
+          \ 'defaultAction': 'execute',
+          \ },
+        \ },
+      \ })
+
+" mapping
+
+nnoremap <silent> <space>ff  <Cmd>call ddu#start({'sources': [{'name': 'file_rec'}]})<CR>
+nnoremap <silent> <space>fr  <Cmd>call ddu#start({'sources': [{'name': 'file_old'}]})<CR>
+nnoremap <silent> <space>fl  <Cmd>call ddu#start({'sources': [{'name': 'line'}]})<CR>
+nnoremap <silent> <space>fb  <Cmd>call ddu#start({'sources': [{'name': 'buffer'}]})<CR>
+nnoremap <silent> <space>fc  <Cmd>call ddu#start({'sources': [{'name': 'command_history'}]})<CR>
+
+autocmd FileType ddu-ff call s:ddu_ff_my_settings()
+function! s:ddu_ff_my_settings() abort
+  nnoremap <buffer><silent> <CR>      <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+  nnoremap <buffer><silent> v         <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+  nnoremap <buffer><silent> i         <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+  nnoremap <buffer><silent> q         <Cmd>call ddu#ui#ff#do_action('quit')<CR>
+  nnoremap <buffer><silent> p         <Cmd>call ddu#ui#ff#do_action('preview')<CR>
+endfunction
+
+autocmd FileType ddu-filer call s:ddu_filer_my_settings()
+function! s:ddu_filer_my_settings() abort
+  nnoremap <buffer><silent> <CR>      <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+endfunction
+
+autocmd FileType ddu-ff-filter call s:ddu_ff_filter_my_settings()
+function! s:ddu_ff_filter_my_settings() abort
+  inoremap <buffer><silent> <CR>  <Esc><Cmd>close<CR>
+  nnoremap <buffer><silent> <CR>  <Cmd>close<CR>
+  nnoremap <buffer><silent> q     <Cmd>close<CR>
+endfunction
+
+" neosnippet
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+if has('conceal')
+  set conceallevel=0 concealcursor=niv
+endif
+let g:neosnippet#snippets_directory=expand('~/.vim/NeoSnips')
+
+" gitgutter
+let g:gitgutter_preview_win_floating = 0
+nmap <Leader>hs <Plug>(GitGutterStageHunk)
+nmap <Leader>ha <Plug>(GitGutterStageHunk)
+nmap <Leader>hu <Plug>(GitGutterUndoHunk)
+nmap <Leader>hp <Plug>(GitGutterPreviewHunk)
+nmap <Leader>hv <Plug>(GitGutterPreviewHunk)
+nmap ]c         <Plug>(GitGutterNextHunk)
+nmap [c         <Plug>(GitGutterPrevHunk)
+omap ic         <Plug>(GitGutterTextObjectInnerPending)
+omap ac         <Plug>(GitGutterTextObjectOuterPending)
+xmap ic         <Plug>(GitGutterTextObjectInnerVisual)
+xmap ac         <Plug>(GitGutterTextObjectOuterVisual)
+nmap ]h         <Plug>(GitGutterNextHunk)
+nmap [h         <Plug>(GitGutterPrevHunk)
+omap ih         <Plug>(GitGutterTextObjectInnerPending)
+omap ah         <Plug>(GitGutterTextObjectOuterPending)
+xmap ih         <Plug>(GitGutterTextObjectInnerVisual)
+xmap ah         <Plug>(GitGutterTextObjectOuterVisual)
+
+" vim-fugitive
+nnoremap <leader>gs :Gstatus<CR><C-w>T
+nnoremap <leader>ga :Gwrite<CR>
+nnoremap <leader>gc :Gcommit-v<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gl :Glog<CR>
+nnoremap <leader>gh :0Glog<CR> " abbrev for git history: create new quickfix tab for history
+nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gf :Gfetch<CR>
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap <leader>gr :Grebase -i<CR>
+nnoremap <leader>gg :Glgrep ""<Left>
+nnoremap <leader>gm :Gmerge 
+
+"deol
+let g:deol#prompt_pattern = '% \|%$'
+nnoremap sz :tabnew:cd %:h<CR>:DeolEdit<CR>
+nnoremap sx :tabnew:cd %:h<CR>:Deol<CR>
+
+" ctags
+let g:auto_ctags_set_tags_option=1
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+" quickrun
+nmap <leader>x <Plug>(quickrun)
+nmap <leader><leader>x :QuickRun 
+
+let g:quickrun_config = {}
+
+let g:quickrun_config._ = {
+      \ 'outputter/buffer/opener': 'new',
+      \ 'outputter/buffer/into': 1,
+      \ 'outputter/buffer/close_on_empty': 1,
+      \ }
+
+let g:quickrun_config['gnuplot'] = {
+    \ 'type' : 'gnuplot', 
+    \ 'command' : 'gnuplot', 
+    \ 'cmdopt' : '--persist', 
+    \ 'exec' : 'cd %s:h;%c %s %o', 
+    \}
+
+let g:quickrun_config['tex']={
+      \ 'type' : 'tex', 
+      \ 'command' : 'latexmk', 
+      \ 'exec' : '%c %s', 
+      \}
+
+let g:quickrun_config["c"]={
+      \ 'type':
+      \ executable('gcc')            ? 'c/gcc' :
+      \ executable('clang')          ? 'c/clang' :
+      \ executable('clang-9')        ? 'c/clang-9' : '',
+      \}
+
+let g:quickrun_config['c/gcc']={
+      \ 'cmdopt' : '-std=c11', 
+      \}
+
+let g:quickrun_config['c/clang']={
+      \ 'command' : 'clang', 
+      \ 'cmdopt' : '-std=c11', 
+      \}
+
+let g:quickrun_config['c/clang-9']={
+      \ 'command' : 'clang-9', 
+      \ 'cmdopt' : '-std=c11', 
+      \}
+
+let g:quickrun_config["cpp"]={
+      \ 'type':
+      \ executable('g++')            ? 'cpp/g++' :
+      \ executable('clang++')        ? 'cpp/clang++'  :
+      \ executable('clang++-9')      ? 'cpp/clang++-9'  : '',
+      \}
+
+let g:quickrun_config['cpp/g++']={
+      \ 'cmdopt' : '-std=c++17', 
+      \}
+
+let g:quickrun_config['cpp/clang++']={
+      \ 'command' : 'clang++-9', 
+      \ 'cmdopt' : '-std=c++17', 
+      \}
+
+let g:quickrun_config['cpp/clang++-9']={
+      \ 'command' : 'clang++-9', 
+      \ 'cmdopt' : '-std=c++17', 
+      \}
+
+let g:quickrun_config['cmake'] = {
+    \ 'command': 'cmake',
+    \ 'exec': ['%c ..', 'make -j', 'echo "\n\n===output==="', './a.out'],
+    \ 'hook/cd/directory' : '%S:h'.'/build',
+    \}
+
+let g:quickrun_config['make'] = {
+    \ 'command': 'make',
+    \ 'exec': ['%c -j', 'echo "\n\n===output==="', './a.out'],
+    \ 'hook/cd/directory' : '%S:h'.'/build',
+    \}
+
+let g:quickrun_config['python'] = {
+      \ 'hook/cd/directory' : '%S:h',
+      \}
+
+let g:quickrun_config['markdown']={
+      \ 'type': 
+      \ executable('pandoc') ? 'markdown/pandoc': '',
+      \}
+
+let g:quickrun_config['markdown/pandoc'] = {
+      \ 'command': 'pandoc',
+      \ 'exec': ['%c %s %o %a -o %s:r.html', 'cat %s:r.html'],
+      \ 'cmdopt' : '-f markdown -t html -s --self-contained ',
+      \}
+
+" easymotion
+map <leader>e <Plug>(easymotion-prefix)
+
+" lightline
+let g:lightline = {
+  \ 'separator': { 'left': '', 'right': '' },
+  \ }
+
+" jellybeans
+colorscheme jellybeans
+set termguicolors
+let g:lightline = {
+  \ 'colorscheme': 'jellybeans',
+  \ }
+
+" vim-lsp
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_echo_delay = 50
+let g:lsp_diagnostics_highlights_enabled = 0
+
+function! s:LC_maps() abort
+  nmap <buffer> <Leader>lc  <plug>(lsp-declaration)
+  nmap <buffer> <Leader>ld  <plug>(lsp-definition)
+  nmap <buffer> <Leader>lh  <plug>(lsp-hover)
+  nmap <buffer> <Leader>li  <plug>(lsp-implementation)
+  imap <buffer> <Leader>lS  <plug>(lsp-signature-help)
+  nmap <buffer> <Leader>lt  <plug>(lsp-type-definition)
+  nmap <buffer> <Leader>lr  <plug>(lsp-rename)
+  nmap <buffer> <Leader>lk  <plug>(lsp-references)
+  nmap <buffer> <Leader>ls  <plug>(lsp-document-symbol)
+  nmap <buffer> <Leader>lw  <plug>(lsp-workspace-symbol)
+  nmap <buffer> <Leader>lf  <plug>(lsp-document-format)
+  nmap <buffer> <Leader>le  <plug>(lsp-document-diagnostics)
+endfunction
+
+augroup vim-lsp
+  au!
+  autocmd User lsp_buffer_enabled call s:LC_maps()
+augroup END
+

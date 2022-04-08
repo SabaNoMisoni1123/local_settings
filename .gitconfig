@@ -1,0 +1,17 @@
+[user]
+	name = skondo
+	email = s.kondo11235813@gmail.com
+[core]
+  editor = /home/skondo/appimages/nvim.appimage
+[color]
+  ui = auto
+[alias]
+  st = status
+  df = diff
+  co = commit
+  br = branch
+  ps = push
+  pl = pull
+  ck = checkout
+  graph = log --pretty=format:'%Cgreen[%cd] %Cblue%h %Cred<%cn> %Creset%s' --date=short  --decorate --graph --branches --tags --remotes
+  diffw = diff --word-diff
