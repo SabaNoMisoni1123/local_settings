@@ -1,14 +1,13 @@
-export SETTING_ROOT=$HOME/linuxSettings
-export DOCKER_SETTING_ROOT=$SETTING_ROOT/docker
+export DOCKER_SETTING_ROOT=$LOCAL_SETTINGS/docker
 
 # zshrc
-cp $SETTING_ROOT/.zshrc_docker $DOCKER_SETTING_ROOT/c_env/.zshrc
-cp $SETTING_ROOT/.zshrc_docker $DOCKER_SETTING_ROOT/python_env/.zshrc
-cp $SETTING_ROOT/.zshrc_docker $DOCKER_SETTING_ROOT/ubuntu_env/.zshrc
-cp $SETTING_ROOT/.zshrc_docker $DOCKER_SETTING_ROOT/python_edit_env/.zshrc
-cp $SETTING_ROOT/.zshrc_docker $DOCKER_SETTING_ROOT/c_env_edit/.zshrc
+cp $LOCAL_SETTINGS/.zshrc_docker $LOCAL_SETTINGS/docker/c_env/.zshrc
+cp $LOCAL_SETTINGS/.zshrc_docker $LOCAL_SETTINGS/docker/python_env/.zshrc
+cp $LOCAL_SETTINGS/.zshrc_docker $LOCAL_SETTINGS/docker/ubuntu_env/.zshrc
+cp $LOCAL_SETTINGS/.zshrc_docker $LOCAL_SETTINGS/docker/python_edit_env/.zshrc
+cp $LOCAL_SETTINGS/.zshrc_docker $LOCAL_SETTINGS/docker/c_env_edit/.zshrc
 
 # vimrc
-cp $SETTING_ROOT/.vimrc $DOCKER_SETTING_ROOT/c_env/
-cp $SETTING_ROOT/.vimrc $DOCKER_SETTING_ROOT/python_env/
-cp $SETTING_ROOT/.vimrc $DOCKER_SETTING_ROOT/torch_env/
+cp $LOCAL_SETTINGS/.vimrc $LOCAL_SETTINGS/docker/c_env/
+cp $LOCAL_SETTINGS/.vimrc $LOCAL_SETTINGS/docker/python_env/
+cp $LOCAL_SETTINGS/.vimrc $LOCAL_SETTINGS/docker/torch_env/

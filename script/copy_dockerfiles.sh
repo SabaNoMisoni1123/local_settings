@@ -1,1 +1,1 @@
-cp -r $HOME/linuxSettings/docker $HOME/workspace/
+cp -r $LOCAL_SETTINGS/docker $HOME/workspace/

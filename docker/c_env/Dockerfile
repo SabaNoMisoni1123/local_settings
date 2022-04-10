@@ -27,16 +27,10 @@ RUN apt-get -y update  \
     clang \
     clang-tools
 
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.23.0/cmake-3.23.0.tar.gz \
- && tar zxvf cmake-3.23.0.tar.gz \
- && cd $HOME/cmake-3.23.0 \
- && ./bootstrap \
- && make -j12 \
- && make install -j8 \
- && cd $HOME \
- && rm cmake-3.23.0.tar.gz
-
-ENV PATH $HOME/cmake-3.23.0/bin:$PATH
+WORKDIR $HOME/appimages
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.23.0/cmake-3.23.0-linux-x86_64.tar.gz \
+ && tar xvf cmake-3.23.0-linux-x86_64.tar.gz
+ENV PATH $HOME/appimages/cmake-3.23.0-linux-x86_64/bin:$PATH
 
 RUN apt-get -y purge tzdata unzip wget crul \
  && apt-get -y autoremove \
