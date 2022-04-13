@@ -32,12 +32,12 @@ export NVIM_PYTHON_LOG_LEVEL=DEBUG
 
 case ${OSTYPE} in
   darwin*)
-    alias v="~/appimages/nvim-osx64/bin/nvim"
-    alias nvim="~/appimages/nvim-osx64/bin/nvim"
+    alias v="$LOCAL_BIN/nvim-osx64/bin/nvim"
+    alias nvim="$LOCAL_BIN/nvim-osx64/bin/nvim"
     ;;
   linux*)
-    alias v="~/appimages/nvim.appimage"
-    alias nvim="~/appimages/nvim.appimage"
+    alias v="$LOCAL_BIN/nvim.appimage"
+    alias nvim="$LOCAL_BIN/nvim.appimage"
     ;;
 esac
 
@@ -59,11 +59,11 @@ if type rbenv > /dev/null; then
 fi
 
 # julia================================
-export PATH="$HOME/appimages/julia-1.5.1/bin:$PATH"
+export PATH="$LOCAL_BIN/julia-1.5.1/bin:$PATH"
 
 
 # go===================================
-export PATH="$HOME/appimages/go/bin:$PATH"
+export PATH="$LOCAL_BIN/go/bin:$PATH"
 
 # goenv
 export GOENV_ROOT="$HOME/.goenv"
@@ -81,10 +81,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # path=================================
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/appimages:$PATH"
+export PATH="$LOCAL_BIN:$PATH"
 export PATH="$HOME/local_settings/script:$PATH"
-chmod +x $HOME/local_settings/script/*.sh
-export NEXTWORD_DATA_PATH=~/appimages/nextword-data
+chmod +x $LOCAL_SETTINGS/script/*.sh
+export NEXTWORD_DATA_PATH=$LOCAL_BIN/nextword-data
 
 
 # Set up the prompt====================
@@ -173,7 +173,14 @@ RPROMPT='`rprompt-git-current-branch`'
 # zsh 表示============================
 PS1="%{$fg[cyan]%}[${USER}@${HOST%%.*} %1~]%(!.#.$)${reset_color} "
 
-# wsl=================================
+# local .zshrc ========================
+# export LOCAL_SETTINGS=$HOME/local_settings
+# export LOCAL_BIN=$HOME/appimages
+# source $LOCAL_SETTINGS/.zshrc
+# alias gpull='git pull origin master'
+# alias gpush='git push origin master'
+
+# wsl
 # setting for xserver
 # umask 022
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0

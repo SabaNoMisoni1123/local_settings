@@ -2,19 +2,20 @@
 
 ## 内容
 
-1. wsl2の導入
-2. pythonのインストール
-3. Neovimのインストール
-4. texliveのインストール
-5. 各種プログラミング言語の環境構築
+1. wsl2の導入（windows）
+2. zsh
+3. pythonのインストール
+4. Neovimのインストール
+5. texliveのインストール
+6. 各種プログラミング言語の環境構築
 	- c/cpp
 	- python
 	- html/css (プログラミング言語ではない)
 	- javasprict
 	- julia
 	- rust
-6. VScode
-7. 各種ソフトウェア
+7. VScode
+8. 各種ソフトウェア
 
 ## wsl2 の導入
 
@@ -42,6 +43,19 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 ```
 
 x serverはこれで導入できた．"xeyes"コマンドによって導入できているのかが確認できる．
+
+## zsh
+zshをインストールする．
+```
+sudo apt install zsh
+chsh -s /bin/zsh
+```
+.zshrcは次のようにする．
+```
+export LOCAL_SETTINGS=$HOME/local_settings
+export LOCAL_BIN=[path to local bin ($HOME/appimages)]
+source $LOCAL_SETTINGS/.zshrc
+```
 
 ## pythonのインストール
 
@@ -77,7 +91,7 @@ pyenv install --list
 
 ```
 python -m pip install --upgrade pip
-pip install -r ~/local_settings/pip_standard.txt
+pip install -r $LOCAL_SETTINGS/python/pip_standard.txt
 ```
 
 ### python-lsp-server
@@ -85,7 +99,7 @@ pip install -r ~/local_settings/pip_standard.txt
 LSP設定ファイルを所定のディレクトリにコピー
 
 ```
-cp ~/local_settings/pycodestyle ~/.config/
+cp $LOCAL_SETTINGS/pycodestyle $XDG_CONFIG_HOME/
 ```
 
 ## Neovimのインストール
@@ -93,18 +107,17 @@ cp ~/local_settings/pycodestyle ~/.config/
 ### Neovim本体
 
 Neovimはappimageをダウンロードすることで入手する．設定ファイル群は，gitからcloneする．SSH鍵はググって何とかする．
-appimagesディレクトリは単にホームディレクトリにそのままappimageファイルを置きたくなかったから作ったもの．
-
+適当な場所に保存すればいい．
 ```
-mkdir appimages
-cd appimages/
+mkdir $LOCAL_BIN
+cd $LOCAL_BIN
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 ls
 chmod +x nvim.appimage
 
 cd ~
-mkdir .config
-cd .config
+mkdir $XDG_CONFIG_HOME
+cd $XDG_CONFIG_HOME
 git clone git@github.com:SK-eee-ku/nvim.git ./nvim
 ```
 
@@ -113,8 +126,8 @@ Neovimの必要な設定を.bash_profileに書く．
 ```
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
-alias v="~/appimages/nvim.appimage"
-alias nvim="~/appimages/nvim.appimage"
+alias v="$LOCAL_BIN/nvim.appimage"
+alias nvim="$LOCAL_BIN/nvim.appimage"
 ```
 
 ### xclip
@@ -159,12 +172,12 @@ goが必要．
 go get -u github.com/high-moctane/nextword
 
 # small
-wget https://github.com/high-moctane/nextword-data/archive/refs/tags/small.tar.gz ~/appimages/
-tar -zxvf ~/appimages/small.tar.gz
+wget https://github.com/high-moctane/nextword-data/archive/refs/tags/small.tar.gz $LOCAL_BIN/
+tar -zxvf $LOCAL_BIN/small.tar.gz
 
 # large
-wget https://github.com/high-moctane/nextword-data/archive/refs/tags/large.tar.gz ~/appimages/
-tar -zxvf ~/appimages/large.tar.gz
+wget https://github.com/high-moctane/nextword-data/archive/refs/tags/large.tar.gz $LOCAL_BIN/
+tar -zxvf $LOCAL_BIN/large.tar.gz
 ```
 
 ## texlive の導入
@@ -174,7 +187,7 @@ tar -zxvf ~/appimages/large.tar.gz
 tlmgrを使って最新版のtexliveを導入する．時間がかなりかかる．手順としてはミラーサイトからインストーラをダウンロードして実行するだけ．最後にパスを通すコマンドを実行するとtexliveのインストールは完了する．注意すべきは，Ubuntuなどでは初期でdvipdfなどが入っていること．この場合は，コマンドによってパスを通しても，もとから入っているdvipdfなどが使われてしまう．この場合はコンパイルがうまく実行できないので，zshrcなどでパスを通す．
 
 ```
-cd ~/appimages
+cd $LOCAL_BIN
 wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar xvf install-tl-unx.tar.gz
 cd install-tl-[日付の番号]
@@ -347,7 +360,7 @@ sudo npm install --global typescript-language-server
 juliaをダウンロードしたうえでLSPも導入しておく．juliaはダウンロードが少し面倒．
 
 ```
-cd appimages
+cd $LOCAL_BIN
 wget https://julialang-s3.julialang.org/bin/linux/x64/1.5/julia-1.5.0-linux-x86_64.tar.gz
 tar -zxvf julia-1.5.0-linux-x86_64.tar.gz
 ```
@@ -355,7 +368,7 @@ tar -zxvf julia-1.5.0-linux-x86_64.tar.gz
 実行ファイルをダウンロードしたらパスを通す．.bash_profileに次のコマンドを加える．
 
 ```
-export PATH="$HOME/appimages/julia-1.5.0/bin:$PATH"
+export PATH="$LOCAL_BIN/julia-1.5.0/bin:$PATH"
 ```
 
 juliaはjupyterで実行が可能である．そのためにjuliaの対話シェルを使いパッケージをインストールする．パッケージのインストールにはjuliaのpkgモードを使う"]"によってpkgモードになる．
@@ -392,9 +405,9 @@ brew install r
 
 ファイルをダウンロードして展開する方法．
 ```
-cd ~/appimages
+cd $LOCAL_BIN
 wget https://dl.google.com/go/go1.15.5.linux-amd64.tar.gz
-sudo tar -C ~/appimages/ -xzf go1.15.5.linux-amd64.tar.gz
+sudo tar -C $LOCAL_BIN/ -xzf go1.15.5.linux-amd64.tar.gz
 ```
 パスを通す．
 ```
@@ -429,7 +442,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 lspはubuntuの場合はバイナリをインストール
 ```
-curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/appimages/rust-analyzer
+curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > $LOCAL_BIN/rust-analyzer
 chmod +x ~/.local/bin/rust-analyzer
 ```
 macの場合brewでインストール
@@ -487,8 +500,8 @@ cmake --version
 ### ctag
 
 ```
-git clone https://github.com/universal-ctags/ctags.git ~/appimages/ctags
-cd ~/appimages/ctags
+git clone https://github.com/universal-ctags/ctags.git $LOCAL_BIN/ctags
+cd $LOCAL_BIN/ctags
 sudo apt install autoconf # なんか必要らしい
 ./autogen.sh
 ./configure --prefix=/usr/local # defaults to /usr/local
