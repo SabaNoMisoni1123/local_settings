@@ -50,8 +50,8 @@ nnoremap sJ <C-w>J
 nnoremap sK <C-w>K
 nnoremap sL <C-w>L
 nnoremap sH <C-w>H
-nnoremap sZ :top terminal<CR>
-nnoremap sz :bo terminal<CR>
+nnoremap sZ :top terminal ++rows=35<CR>
+nnoremap sz :bo terminal ++rows=10<CR>
 nnoremap sx :tab terminal<CR>
 nnoremap sn gt
 nnoremap sp gT
