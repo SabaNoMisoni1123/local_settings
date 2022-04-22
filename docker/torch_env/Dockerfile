@@ -4,9 +4,9 @@ USER root
 ENV HOME=/root
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV PYENV_ROOT $HOME/.pyenv
-ENV PATH $PYENV_ROOT/bin:$PATH
-ENV PATH $PYENV_ROOT/shims:$PATH
+ENV PYENV_ROOT=$HOME/.pyenv
+ENV PATH=$PYENV_ROOT/bin:$PATH
+ENV PATH=$PYENV_ROOT/shims:$PATH
 
 RUN apt-get update \
  && apt-get install -y \

@@ -3,10 +3,11 @@ FROM paperist/texlive-ja:debian
 USER root
 ENV HOME=/root
 ENV DEBIAN_FRONTEND=noninteractive
+ARG LOCAL_BIN $HOME/.local/app
 
-ENV PYENV_ROOT $HOME/.pyenv
-ENV PATH $PYENV_ROOT/bin:$PATH
-ENV PATH $PYENV_ROOT/shims:$PATH
+ENV PYENV_ROOT=$HOME/.pyenv
+ENV PATH=$PYENV_ROOT/bin:$PATH
+ENV PATH=$PYENV_ROOT/shims:$PATH
 
 RUN apt-get update \
  && apt-get install -y \
@@ -49,13 +50,14 @@ RUN apt-get purge -y git wget \
  && mkdir -p /root/.config/matplotlib \
  && echo "backend : Agg" > /root/.config/matplotlib/matplotlibrc
 
-WORKDIR $HOME/appimages
+WORKDIR $LOCAL_BIN
 RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage \
  && chmod +x nvim.appimage \
  && ./nvim.appimage --appimage-extract \
  && curl -fsSL https://deno.land/x/install/install.sh | sh \
- && git clone https://github.com/SK-eee-ku/nvim_setting.git $XDG_CONFIG_HOME/nvim
-ENV PATH $HOME/appimages/squashfs-root/usr/bin:$PATH
+ && git clone https://github.com/SK-eee-ku/nvim_setting.git $XDG_CONFIG_HOME/nvim \
+ && $LOCAL_BIN/squashfs-root/usr/bin/nvim --headless +so $XDG_CONFIG_HOME/nvim/init.vim +qa
+ENV PATH=$LOCAL_BIN/squashfs-root/usr/bin:$PATH
 
 COPY ./*rc /root/
 CMD ["/bin/bash"]
