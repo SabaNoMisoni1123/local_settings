@@ -27,8 +27,7 @@ RUN apt-get -y update  \
     wget \
     curl \
     libssl-dev \
-    clang \
-    clang-tools
+    clang
 
 WORKDIR $LOCAL_BIN
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.23.0/cmake-3.23.0-linux-x86_64.tar.gz \

@@ -1,0 +1,17 @@
+# alias================================
+alias ls="ls -a"
+alias ll='ls -alF'
+alias cls='clear'
+alias slp="systemctl suspend"
+
+
+case ${OSTYPE} in
+  darwin*)
+    alias v="$LOCAL_BIN/nvim-osx64/bin/nvim"
+    alias nvim="$LOCAL_BIN/nvim-osx64/bin/nvim"
+    ;;
+  linux*)
+    alias v="$LOCAL_BIN/nvim.appimage"
+    alias nvim="$LOCAL_BIN/nvim.appimage"
+    ;;
+esac

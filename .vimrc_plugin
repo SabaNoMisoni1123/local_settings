@@ -7,16 +7,6 @@ filetype plugin indent on
 syntax enable
 set conceallevel=0
 
-" file exprole
-noremap <leader>d   :Explore %:h<CR>
-noremap <leader>n   :Ve %:h<CR>
-nnoremap st         :tab sp<CR>:Explore %:h<CR>
-
-function! s:Netrw_mymap()
-  nmap <buffer> h -
-  nmap <buffer> l <CR>
-endfunction
-
 " move to the end of a text after copying/pasting it
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
@@ -34,7 +24,6 @@ nnoremap <Space> <Nop>
 " window control
 nnoremap ss :split<CR>
 nnoremap sv :vsplit<CR>
-" st is used by defx
 nnoremap sc :tab sp<CR>
 nnoremap sC :-tab sp<CR>
 nnoremap sj <C-w>j
@@ -409,43 +398,75 @@ call ddc#enable()
 call ddu#custom#patch_global({
       \ 'ui': 'ff',
       \ 'uiParams': {
-        \ 'ff':{
-          \ 'split':  'horizontal',
-          \ 'startFilter':  v:true,
-        \ },
-        \ 'filer':{
-          \ 'split':  'no',
-          \ 'winWidth':  &columns / 4,
-        \ },
+      \   'ff':{
+      \     'split':  'floating',
+      \     'startFilter':  v:true,
+      \   },
+      \   'filer':{
+      \     'split':  'no',
+      \   },
       \ },
       \ 'sourceOptions': {
-        \ '_': {
-          \ 'matchers': ['matcher_substring'],
-          \ },
-        \ },
+      \   '_': {
+      \     'matchers': ['matcher_substring'],
+      \   },
+      \ },
       \ 'kindOptions': {
-        \ 'file': {
-          \ 'defaultAction': 'open',
-          \ },
-        \ 'command_history': {
-          \ 'defaultAction': 'execute',
-          \ },
-        \ },
+      \   'file': {
+      \     'defaultAction': 'open',
+      \   },
+      \   'command_history': {
+      \     'defaultAction': 'execute',
+      \   },
+      \ },
+      \ 'actionOptions': {
+      \   'narrow': {'quit': v:false},
+      \ },
+      \ })
+
+call ddu#custom#patch_local('filer', {
+      \ 'ui': 'filer',
+      \ 'sources': [{'name': 'file'}],
+      \ 'uiParams': {
+      \   'filer': {
+      \     'split': 'no',
+      \   },
+      \ },
+      \ })
+
+call ddu#custom#patch_local('filer_float', {
+      \ 'ui': 'filer',
+      \ 'sources': [{'name': 'file'}],
+      \ 'uiParams': {
+      \   'filer': {
+      \     'split': 'floating',
+      \   },
+      \ },
       \ })
 
 " mapping
 
 nnoremap <silent> <space>ff  <Cmd>call ddu#start({'sources': [{'name': 'file_rec'}]})<CR>
 nnoremap <silent> <space>fr  <Cmd>call ddu#start({'sources': [{'name': 'file_old'}]})<CR>
-nnoremap <silent> <space>fl  <Cmd>call ddu#start({'sources': [{'name': 'line'}]})<CR>
+nnoremap <silent> /          <Cmd>call ddu#start({'sources': [{'name': 'line'}]})<CR>
 nnoremap <silent> <space>fb  <Cmd>call ddu#start({'sources': [{'name': 'buffer'}]})<CR>
 nnoremap <silent> <space>fc  <Cmd>call ddu#start({'sources': [{'name': 'command_history'}]})<CR>
+nnoremap <silent> <space>d   <Cmd>call ddu#start({'name': 'filer'})<CR>
+nnoremap <silent> <space>z   <Cmd>call ddu#start({'name': 'filer_float'})<CR>
+nnoremap <silent> st         <Cmd>tabnew<CR><Cmd>call ddu#start({'name': 'filer'})<CR>
+nnoremap <silent> <space>n   <Cmd>topleft 40vsplit<CR><Cmd>call ddu#start({'name': 'filer'})<CR>
 
 autocmd FileType ddu-ff call s:ddu_ff_my_settings()
 function! s:ddu_ff_my_settings() abort
   nnoremap <buffer><silent> <CR>      <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
+  nnoremap <buffer><silent> <Space>   <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+  nnoremap <buffer><silent> <C-l>     <Cmd>call ddu#ui#ff#do_action('refreshItems')<CR>
   nnoremap <buffer><silent> v         <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
+  nnoremap <buffer><silent> e         <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'edit'})<CR>
+  nnoremap <buffer><silent> dd        <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'delete'})<CR>
+  nnoremap <buffer><silent> c         <Cmd>call ddu#ui#ff#do_action('itemAction', {'name': 'cd'})<CR>
   nnoremap <buffer><silent> i         <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
+  nnoremap <buffer><silent> a         <Cmd>call ddu#ui#ff#do_action('chooseAction')<CR>
   nnoremap <buffer><silent> q         <Cmd>call ddu#ui#ff#do_action('quit')<CR>
   nnoremap <buffer><silent> p         <Cmd>call ddu#ui#ff#do_action('preview')<CR>
 endfunction
@@ -457,9 +478,36 @@ endfunction
 
 autocmd FileType ddu-ff-filter call s:ddu_ff_filter_my_settings()
 function! s:ddu_ff_filter_my_settings() abort
-  inoremap <buffer><silent> <CR>  <Esc><Cmd>close<CR>
-  nnoremap <buffer><silent> <CR>  <Cmd>close<CR>
-  nnoremap <buffer><silent> q     <Cmd>close<CR>
+  nnoremap <buffer><expr> <CR>
+    \ ddu#ui#filer#is_directory() ?
+    \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow'})<CR>" :
+    \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'open'})<CR>"
+
+  nnoremap <buffer><expr> o
+    \ ddu#ui#filer#is_directory() ?
+    \ "<Cmd>call ddu#ui#filer#do_action('expandItem')<CR>" :
+    \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'open'})<CR>"
+
+  nnoremap <buffer><expr> O
+    \ ddu#ui#filer#is_directory() ?
+    \ "<Cmd>call ddu#ui#filer#do_action('collapseItem')<CR>" :
+    \ ""
+
+  nnoremap <buffer><expr> l
+    \ ddu#ui#filer#is_directory() ?
+    \ "<Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow'})<CR>" : ""
+
+  nnoremap <buffer><silent> h               <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow', 'params': {'path': '..'}})<CR>
+  nnoremap <buffer><silent> ~               <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow', 'params': {'path': expand('~')}})<CR>
+
+  nnoremap <buffer><silent> <Space>         <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+  nnoremap <buffer><silent> <2-LeftMouse>   <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+  nnoremap <buffer><silent> K               <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newDirectory'})<CR>
+  nnoremap <buffer><silent> L               <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newFile'})<CR>
+  nnoremap <buffer><silent> s               <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'loclist'})<CR>
+  nnoremap <buffer><silent> x               <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'executeSystem'})<CR>
+  nnoremap <buffer><silent> dd              <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'delete'})<CR>
+  nnoremap <buffer><silent> q               <Cmd>call ddu#ui#filer#do_action('quit')<CR>
 endfunction
 
 " neosnippet
@@ -542,27 +590,41 @@ let g:tagbar_type_go = {
 
 " quickrun
 nmap <leader>x <Plug>(quickrun)
-nmap <leader><leader>x :QuickRun 
+nmap <leader><leader>x :QuickRun<Space>
+
+autocmd FileType quickrun call s:quickrun_py_settings()
+function! s:quickrun_py_settings() abort
+  nnoremap <buffer><silent> q   <Cmd>quit!<CR>
+endfunction
 
 let g:quickrun_config = {}
 
 let g:quickrun_config._ = {
-      \ 'outputter/buffer/opener': 'new',
+      \ 'outputter/buffer/opener': '10new',
       \ 'outputter/buffer/into': 1,
       \ 'outputter/buffer/close_on_empty': 1,
       \ }
 
 let g:quickrun_config['gnuplot'] = {
-    \ 'type' : 'gnuplot', 
-    \ 'command' : 'gnuplot', 
-    \ 'cmdopt' : '--persist', 
-    \ 'exec' : 'cd %s:h;%c %s %o', 
+    \ 'type' : 'gnuplot',
+    \ 'command' : 'gnuplot',
+    \ 'cmdopt' : '--persist',
+    \ 'exec' : 'cd %s:h;%c %s %o',
+    \ 'hook/cd/directory' : '%S:h',
+    \}
+
+let g:quickrun_config['matlab'] = {
+    \ 'type' : 'matlab',
+    \ 'command' : 'octave',
+    \ 'exec' : 'cd %s:h;%c %s',
+    \ 'hook/cd/directory' : '%S:h',
     \}
 
 let g:quickrun_config['tex']={
-      \ 'type' : 'tex', 
-      \ 'command' : 'latexmk', 
-      \ 'exec' : '%c %s', 
+      \ 'type' : 'tex',
+      \ 'command' : 'latexmk',
+      \ 'exec' : '%c %s',
+      \ 'hook/cd/directory' : '%S:h',
       \}
 
 let g:quickrun_config["c"]={
@@ -573,17 +635,20 @@ let g:quickrun_config["c"]={
       \}
 
 let g:quickrun_config['c/gcc']={
-      \ 'cmdopt' : '-std=c11', 
+      \ 'cmdopt' : '-std=c11',
+      \ 'hook/cd/directory' : '%S:h',
       \}
 
 let g:quickrun_config['c/clang']={
-      \ 'command' : 'clang', 
-      \ 'cmdopt' : '-std=c11', 
+      \ 'command' : 'clang',
+      \ 'cmdopt' : '-std=c11',
+      \ 'hook/cd/directory' : '%S:h',
       \}
 
 let g:quickrun_config['c/clang-9']={
-      \ 'command' : 'clang-9', 
-      \ 'cmdopt' : '-std=c11', 
+      \ 'command' : 'clang-9',
+      \ 'cmdopt' : '-std=c11',
+      \ 'hook/cd/directory' : '%S:h',
       \}
 
 let g:quickrun_config["cpp"]={
@@ -594,45 +659,86 @@ let g:quickrun_config["cpp"]={
       \}
 
 let g:quickrun_config['cpp/g++']={
-      \ 'cmdopt' : '-std=c++17', 
+      \ 'cmdopt' : '-std=c++17',
+      \ 'hook/cd/directory' : '%S:h',
       \}
 
 let g:quickrun_config['cpp/clang++']={
-      \ 'command' : 'clang++-9', 
-      \ 'cmdopt' : '-std=c++17', 
+      \ 'command' : 'clang++-9',
+      \ 'cmdopt' : '-std=c++17',
+      \ 'hook/cd/directory' : '%S:h',
       \}
 
 let g:quickrun_config['cpp/clang++-9']={
-      \ 'command' : 'clang++-9', 
-      \ 'cmdopt' : '-std=c++17', 
+      \ 'command' : 'clang++-9',
+      \ 'cmdopt' : '-std=c++17',
+      \ 'hook/cd/directory' : '%S:h',
       \}
 
 let g:quickrun_config['cmake'] = {
     \ 'command': 'cmake',
     \ 'exec': ['%c ..', 'make -j', 'echo "\n\n===output==="', './a.out'],
-    \ 'hook/cd/directory' : '%S:h'.'/build',
+    \ 'hook/cd/directory' : '%S:h:h'.'/build',
+    \}
+
+let g:quickrun_config['cmake/first'] = {
+    \ 'command': 'cmake',
+    \ 'exec': [
+    \   '%c -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..',
+    \   'cp ./compile_commands.json ./../',
+    \   'make -j',
+    \   'echo "\n\n===output==="',
+    \   './a.out'
+    \ ],
+    \ 'hook/cd/directory' : '%S:h:h'.'/build',
     \}
 
 let g:quickrun_config['make'] = {
     \ 'command': 'make',
     \ 'exec': ['%c -j', 'echo "\n\n===output==="', './a.out'],
-    \ 'hook/cd/directory' : '%S:h'.'/build',
+    \ 'hook/cd/directory' : '%S:h:h'.'/build',
     \}
 
 let g:quickrun_config['python'] = {
       \ 'hook/cd/directory' : '%S:h',
       \}
 
+let g:quickrun_config['scilab'] = {
+      \ 'command' : 'scilab-cli',
+      \ 'exec': ['%c -f %s -quit'],
+      \ 'hook/cd/directory' : '%S:h',
+      \}
+
 let g:quickrun_config['markdown']={
-      \ 'type': 
+      \ 'type':
       \ executable('pandoc') ? 'markdown/pandoc': '',
+      \ 'hook/cd/directory' : '%S:h',
       \}
 
 let g:quickrun_config['markdown/pandoc'] = {
       \ 'command': 'pandoc',
       \ 'exec': ['%c %s %o %a -o %s:r.html', 'cat %s:r.html'],
-      \ 'cmdopt' : '-f markdown -t html -s --self-contained ',
+      \ 'cmdopt' : '-f markdown -t html -s --self-contained --css $XDG_CONFIG_HOME/nvim/css/github-pandoc.css',
+      \ 'hook/cd/directory' : '%S:h',
       \}
+
+let g:quickrun_config['javascript'] = {
+      \ 'type':
+      \ executable('js') ? 'javascript/spidermonkey':
+      \ executable('d8') ? 'javascript/v8':
+      \ executable('node') ? 'javascript/nodejs':
+      \ executable('phantomjs') ? 'javascript/phantomjs':
+      \ executable('jrunscript') ? 'javascript/rhino':
+      \ executable('cscript') ? 'javascript/cscript':
+      \ executable('deno') ? 'javascript/deno':
+      \ '',
+      \ }
+
+let g:quickrun_config['javascript/deno'] = {
+      \ 'command': 'deno',
+      \ 'exec': ['%c run -q %s'],
+      \ 'hook/cd/directory' : '%S:h',
+      \ }
 
 " easymotion
 map <leader>e <Plug>(easymotion-prefix)

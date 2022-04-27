@@ -10,7 +10,6 @@ matplotlib = "*"
 seaborn = "*"
 
 [dev-packages]
-neovim = "*"
 python-lsp-server = {extras = ["all"], version = "*"}
 python-lsp-black = "*"
 pyls-isort = "*"

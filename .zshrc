@@ -1,11 +1,3 @@
-# alias================================
-alias ls="ls -a"
-alias ll='ls -alF'
-alias trash="~/trash.sh"
-alias cls='clear'
-alias slp="systemctl suspend"
-
-
 # pyenv================================
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -29,18 +21,6 @@ export XDG_RUNTIME_DIR=~/.cache/runtime
 # neovim===============================
 export NVIM_PYTHON_LOG_FILE=/tmp/log
 export NVIM_PYTHON_LOG_LEVEL=DEBUG
-
-case ${OSTYPE} in
-  darwin*)
-    alias v="$LOCAL_BIN/nvim-osx64/bin/nvim"
-    alias nvim="$LOCAL_BIN/nvim-osx64/bin/nvim"
-    ;;
-  linux*)
-    alias v="$LOCAL_BIN/nvim.appimage"
-    alias nvim="$LOCAL_BIN/nvim.appimage"
-    ;;
-esac
-
 
 # llvm for mac=========================
 case ${OSTYPE} in
@@ -173,12 +153,13 @@ RPROMPT='`rprompt-git-current-branch`'
 # zsh 表示============================
 PS1="%{$fg[cyan]%}[${USER}@${HOST%%.*} %1~]%(!.#.$)${reset_color} "
 
+#  aliasの設定
+source $LOCAL_SETTINGS/.zsh_alias
+
 # local .zshrc ========================
 # export LOCAL_SETTINGS=$HOME/local_settings
 # export LOCAL_BIN=$HOME/appimages
 # source $LOCAL_SETTINGS/.zshrc
-# alias gpull='git pull origin master'
-# alias gpush='git push origin master'
 
 # wsl
 # setting for xserver

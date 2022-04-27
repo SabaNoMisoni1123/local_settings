@@ -28,7 +28,6 @@ RUN apt-get -y update  \
     git \
     libssl-dev \
     clang \
-    clang-tools \
     clangd-12 \
  && update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
 
