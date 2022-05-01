@@ -1,15 +1,14 @@
 {
     "workbench.startupEditor": "newUntitledFile",
-    "window.zoomLevel": 2,
     "editor.quickSuggestions": true,
     "editor.suggest.showVariables": false,
     "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "trailing",
     "editor.acceptSuggestionOnEnter": "off",
 
-    "editor.fontSize": 12,
+    "editor.fontSize": 11,
     "editor.minimap.enabled": false,
-    "vscode-neovim.neovimExecutablePaths.linux": "/home/skondo/appimages/nvim.appimage",
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/skondo/.local/app/nvim.appimage",
     "vscode-neovim.neovimInitVimPaths.linux": "/home/skondo/.config/nvim/init.vim",
     "vscode-neovim.logLevel": "warn",
     "vscode-neovim.logOutputToConsole": true,
@@ -52,5 +51,25 @@
                 "%DOC%"
             ]
         }
-    ]
+    ],
+    "vscode-neovim.highlightGroups.highlights": {
+
+        "Directory": "vim",
+        "IncSearch": {
+            "backgroundColor": "theme.editor.findMatchBackground",
+            "borderColor": "theme.editor.findMatchBorder"
+        },
+        "Search": {
+            "backgroundColor": "theme.editor.findMatchHighlightBackground",
+            "borderColor": "theme.editor.findMatchHighlightBorder"
+        },
+        "Visual": {
+            "backgroundColor": "theme.editor.selectionBackground"
+        },
+        "Conceal": "vim",
+        "Substitute": "vim"
+    },
+    "editor.wordWrap": "on",
+    "workbench.editor.enablePreview": false,
+    "editor.folding": false
 }
