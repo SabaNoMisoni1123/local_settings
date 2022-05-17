@@ -15,3 +15,5 @@ case ${OSTYPE} in
     alias nvim="$LOCAL_BIN/nvim.appimage"
     ;;
 esac
+
+alias prp="pipenv run python"
