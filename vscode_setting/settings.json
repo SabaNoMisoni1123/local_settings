@@ -10,6 +10,8 @@
     "editor.minimap.enabled": false,
     "vscode-neovim.neovimExecutablePaths.linux": "/home/skondo/.local/app/nvim.appimage",
     "vscode-neovim.neovimInitVimPaths.linux": "/home/skondo/.config/nvim/init.vim",
+    "vscode-neovim.neovimExecutablePaths.darwin": "/Users/skondo/.local/app/nvim-osx64/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "/Users/skondo/.config/nvim/init.vim",
     "vscode-neovim.logLevel": "warn",
     "vscode-neovim.logOutputToConsole": true,
 
