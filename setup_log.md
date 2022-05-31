@@ -240,15 +240,6 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
 
 ### python
 
-#### jedi
-
-jediを使う必要があるのでそのためのパッケージを中心にインストール．機械学習関連のパッケージは仮想の実行環境を作ってインストールすることにする(端末間の移植性の担保)．
-
-```
-pip install flake8 autopep8 black isort flake8-import-order jedi
-pip install numpy pandas scipy matplotlib
-```
-
 #### jupyter
 
 jupyterを使えるようにする．まずはjupyter関連のパッケージをインストール．拡張機能や補完機能もインストール．
