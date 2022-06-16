@@ -155,13 +155,3 @@ PS1="%{$fg[cyan]%}[${USER}@${HOST%%.*} %1~]%(!.#.$)${reset_color} "
 
 #  aliasの設定
 source $LOCAL_SETTINGS/.zsh_alias
-
-# local .zshrc ========================
-# export LOCAL_SETTINGS=$HOME/local_settings
-# export LOCAL_BIN=$HOME/appimages
-# source $LOCAL_SETTINGS/.zshrc
-
-# wsl
-# setting for xserver
-# umask 022
-# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
