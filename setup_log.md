@@ -278,8 +278,6 @@ c.NotebookApp.contents_manager_class = "jupytext.TextFileContentsManager"
 c.ContentsManager.default_jupytext_formats = "ipynb,py"
 ```
 
-最後に~/.jupyter/custom直下にcustom.jsを置く．
-
 #### jupyter lab
 
 ```
@@ -462,6 +460,7 @@ sudo snap install --classic code
 - clangd
 - latex-workshop
 - code spell checker
+- jupyter
 
 ### setting
 
