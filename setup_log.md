@@ -228,14 +228,22 @@ cargo install --git https://github.com/latex-lsp/texlab.git --locked
 ## 各種プログラミング言語の環境構築
 
 ### c/c++
-LSPを使うだけなので簡単．clangと clangdをダウンロードすることで完了．
-clangdは普通にはインストールできない．
-clandのバージョンは探す．
-
+clang，clangdは以下の方法でインストール．
 ```
-sudo apt install clang clang-tools
+sudo apt install clang
 sudo apt install clangd-10
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
+```
+
+gcc/g++のバージョンが古い場合は以下の手順．これによりいくつかのバージョンをインストールできる．
+```
+sudo apt install gcc-7 gcc-8 gcc-9 g++-7 g++-8 g++-9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 7
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 7
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 8
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
 ```
 
 ### python
