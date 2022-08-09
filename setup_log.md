@@ -312,7 +312,14 @@ sudo fc-cache -fv
 ### javasprict
 
 #### nodejs
-nodejsとVuejsのインストール方法．Ubuntuから．
+nodeのバージョン管理方法はいろいろあるので，好きなほうを使う．
+まずはnvmを使う場合は以下のコマンドを実行する．必要な設定は.zshrcにすでに書いている．
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install --lts
+```
+
+以下はnを使うバージョン．
 ```
 sudo apt install nodejs npm
 sudo npm install n -g
@@ -344,7 +351,7 @@ curl -fsSL https://deno.land/x/install/install.sh | sh
 
 ### html/css LSP
 
-nodejsがインストールされていることが前提．cssに関してはjavasprictのLSPで対応できたはず．これを実現するためにnodejsをダウンロードする．nを使うことで容易にバージョン管理する．typescript-language-serverに関しては，denoをインストールしている場合不要．
+nodejsがインストールされていることが前提．cssに関してはjavasprictのLSPで対応できたはず．これを実現するためにnodejsをダウンロードする．typescript-language-serverに関しては，denoをインストールしている場合不要．
 
 ```
 sudo npm install --global vscode-css-languageserver-bin
