@@ -558,9 +558,44 @@ docker rm [container name]
 
 ### vim
 ubuntu
+```
 sudo apt install software-properties-common
 sudo apt update
 sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
 sudo apt install vim
 ```
+
+### google drive
+grive2を使う．
+```
+sudo add-apt-repository ppa:nilarimogard/webupd8
+sudo apt-get update
+sudo apt-get install grive
+```
+
+
+ビルドする方法
+```
+sudo apt-get install libgcrypt20-dev libyajl-dev libboost-all-dev libcurl4-openssl-dev libexpat1-dev libcppunit-dev binutils-dev debhelper zlib1g-dev pkg-config
+git clone https://github.com/vitalif/grive2.git
+cd grive2
+mkdir build
+cd build
+cmake ..
+make -j
+sudo make install
+```
+
+インストールできたら以下のコマンドを実行する．
+```
+cd /path/to/grive_dir
+cp $LOCAL_SETTINGS/.griveignore ./
+
+grive -a # 流れで認証を実行する
+systemctl --user enable grive-timer@$(systemd-escape google-drive).timer
+systemctl --user start grive-timer@$(systemd-escape google-drive).timer
+systemctl --user enable grive-changes@$(systemd-escape google-drive).service
+systemctl --user start grive-changes@$(systemd-escape google-drive).service
+```
+停止は多分stopとdisableを使うと思われ．
