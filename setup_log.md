@@ -587,12 +587,15 @@ make -j
 sudo make install
 ```
 
-インストールできたら以下のコマンドを実行する．
+インストールできたら以下のコマンドを実行する．自動化に関してはうまく行ってないので，そのうち調査する．
 ```
 cd /path/to/grive_dir
 cp $LOCAL_SETTINGS/.griveignore ./
 
 grive -a # 流れで認証を実行する
+
+# 自動化
+sudo apt install inotify-tools
 systemctl --user enable grive-timer@$(systemd-escape google-drive).timer
 systemctl --user start grive-timer@$(systemd-escape google-drive).timer
 systemctl --user enable grive-changes@$(systemd-escape google-drive).service
