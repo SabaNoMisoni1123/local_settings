@@ -602,3 +602,15 @@ systemctl --user enable grive-changes@$(systemd-escape google-drive).service
 systemctl --user start grive-changes@$(systemd-escape google-drive).service
 ```
 停止は多分stopとdisableを使うと思われ．
+
+### pandoc
+Markdownのコンパイルなどで使う．aptを使えば簡単にインストールできるが最新版ではない．
+```
+sudo apt install pandoc
+```
+最新版をインストールするにはちょっと面倒な方法を使う必要がある．
+```
+cd $LOCAL_BIN
+wget https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb
+sudo dpkg -i pandoc-2.19-1-amd64.deb
+```
