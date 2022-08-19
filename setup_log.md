@@ -360,7 +360,7 @@ nodejs がインストールされていることが前提．css に関しては
 ```
 sudo npm install --global vscode-css-languageserver-bin
 sudo npm install --global vscode-langservers-extracted
-sudo npm install --global typescript-language-server
+sudo npm install --global typescript-language-server typescript
 ```
 
 ### julia
