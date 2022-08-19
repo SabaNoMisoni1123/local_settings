@@ -146,11 +146,15 @@ sudo apt install default-jdk unzip
 
 ### textlint
 
-日本語校閲
-npmを事前にインストールすることが必要．
+npmを事前にインストールすることが必要．また，設定ファイルをホームディレクトリに配置する必要がある．
+ルールの追加をした場合は，設定ファイル側にも反映させる．
 ```
 sudo npm install -g textlint
-sudo npm install -g textlint-rule-preset-ja-technical-writing textlint-rule-spellcheck-tech-word
+sudo npm install -g \
+    textlint-rule-preset-ja-technical-writing \
+    textlint-rule-ja-space-around-link \
+    textlint-rule-preset-ja-spacing \
+    textlint-rule-spellcheck-tech-word
 ```
 
 ### 英単語辞書
