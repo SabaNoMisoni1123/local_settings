@@ -1,9 +1,7 @@
 # pyenv================================
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if type pyenv > /dev/null; then
-  eval "$(pyenv init -)"
-fi
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 
 # deno=================================
@@ -37,6 +35,7 @@ if type rbenv > /dev/null; then
   eval "$(rbenv init -)"
 fi
 
+
 # julia================================
 export PATH="$LOCAL_BIN/julia-1.5.1/bin:$PATH"
 
@@ -57,9 +56,11 @@ export PATH="$PATH:$GOPATH/bin"
 # rust=================================
 export PATH="$HOME/.cargo/bin:$PATH"
 
+
 # nvm==================================
 export NVM_DIR="$XDG_CONFIG_HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 
 # path=================================
 export PATH="$HOME/.local/bin:$PATH"
@@ -156,3 +157,5 @@ PS1="%{$fg[cyan]%}[${USER}@${HOST%%.*} %1~]%(!.#.$)${reset_color} "
 
 #  aliasの設定
 source $LOCAL_SETTINGS/.zsh_alias
+
+echo "load local_settings/.zshrc"
