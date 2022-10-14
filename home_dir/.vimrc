@@ -241,3 +241,48 @@ let g:netrw_liststyle=1
 let g:netrw_sizestyle="H"
 let g:netrw_timefmt="%Y/%m/%d(%a) %H:%M:%S"
 let g:netrw_preview=1
+
+
+" netrw mapping
+function! NetrwMapping_sh(islocal) abort
+  return "normal! \<C-w>h"
+endfunction
+
+function! NetrwMapping_sl(islocal) abort
+  return "normal! \<C-w>l"
+endfunction
+
+function! NetrwMapping_sj(islocal) abort
+  return "normal! \<C-w>j"
+endfunction
+
+function! NetrwMapping_sk(islocal) abort
+  return "normal! \<C-w>k"
+endfunction
+
+function! NetrwMapping_sH(islocal) abort
+  return "normal! \<C-w>H"
+endfunction
+
+function! NetrwMapping_sL(islocal) abort
+  return "normal! \<C-w>L"
+endfunction
+
+function! NetrwMapping_sJ(islocal) abort
+  return "normal! \<C-w>J"
+endfunction
+
+function! NetrwMapping_sK(islocal) abort
+  return "normal! \<C-w>K"
+endfunction
+
+let g:Netrw_UserMaps = [
+  \ ['sh', 'NetrwMapping_sh'],
+  \ ['sl', 'NetrwMapping_sl'],
+  \ ['sj', 'NetrwMapping_sj'],
+  \ ['sk', 'NetrwMapping_sk'],
+  \ ['sH', 'NetrwMapping_sH'],
+  \ ['sL', 'NetrwMapping_sL'],
+  \ ['sJ', 'NetrwMapping_sJ'],
+  \ ['sK', 'NetrwMapping_sK'],
+  \ ]
