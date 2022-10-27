@@ -4,7 +4,7 @@ source $LOCAL_SETTINGS/.zshrc
 
 export GHOME="/path/to/google drive"
 export MEMO_DIR=$GHOME/memo
-export DROPBOX_HOME="/mnt/d/skond/Dropbox_Mlab/Dropbox (MLab)/"
+export DROPBOX_HOME="/path/to/dropbox"
 export RESEARCH_HOME=$DROPBOX_HOME/ku_research
 
 alias cdg='cd $GHOME'
