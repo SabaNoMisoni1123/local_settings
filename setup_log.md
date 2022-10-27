@@ -618,3 +618,9 @@ cd $LOCAL_BIN
 wget https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb
 sudo dpkg -i pandoc-2.19-1-amd64.deb
 ```
+
+### marp cli
+Markdown をプレゼンテーションスライド形式でコンパイルする．
+```
+npm install -g @marp-team/marp-cli
+```
