@@ -13,3 +13,9 @@ seaborn = "*"
 python-lsp-server = {extras = ["all"], version = "*"}
 python-lsp-black = "*"
 pyls-isort = "*"
+
+[tool.black]
+line-length = 100
+
+[pycodestyle]
+max-line-length = 100

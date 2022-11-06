@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyterlab = "*"
+
+[dev-packages]
+jupytext = "*"
+jupyterlab_code_formatter = "*"
+jupyterlab_vim = "*"
+black = "*"
+isort = "*"
+
+[tool.black]
+line-length = 100
+
+[scripts]
+note = """
+jupyter notebook --NotebookApp.use_redirect_file=False
+"""
+lab = """
+jupyter lab --NotebookApp.use_redirect_file=False
+"""
+
+[requires]
+python_version = "3"
