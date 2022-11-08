@@ -8,6 +8,8 @@ export DROPBOX_HOME="/path/to/dropbox"
 export RESEARCH_HOME=$DROPBOX_HOME/ku_research
 
 alias cdg='cd $GHOME'
+alias cdt="cd $HOME/workspace/test"
+alias cdn="cd $XDG_CONFIG_HOME/nvim"
 
 # wsl
 # setting for xserver
