@@ -229,6 +229,12 @@ rust が必要．
 cargo install --git https://github.com/latex-lsp/texlab.git --locked
 ```
 
+### パッケージインストール
+`/usr/local/texlive/texmf-local`の直下にファイルを配置して以下のコマンドを実行する．
+```
+sudo mktexlsr
+```
+
 ## 各種プログラミング言語の環境構築
 
 ### c/c++
