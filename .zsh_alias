@@ -17,3 +17,4 @@ case ${OSTYPE} in
 esac
 
 alias prp="pipenv run python"
+alias pr="pipenv run"
