@@ -4,18 +4,17 @@
 
 1. wsl2 の導入（Windows）
 2. zsh
-3. Python のインストール
-4. Neovim のインストール
-5. texlive のインストール
-6. 各種プログラミング言語の環境構築
+3. Neovim のインストール
+4. texlive のインストール
+5. 各種プログラミング言語の環境構築
 	- c/cpp
 	- Python
 	- html/css (プログラミング言語ではない)
 	- javasprict
 	- julia
 	- rust
-7. VScode
-8. 各種ソフトウェア
+6. VScode
+7. 各種ソフトウェア等
 
 ## wsl2 の導入
 
@@ -55,51 +54,6 @@ chsh -s /bin/zsh
 export LOCAL_SETTINGS=$HOME/local_settings
 export LOCAL_BIN=[path to local bin ($HOME/appimages)]
 source $LOCAL_SETTINGS/.zshrc
-```
-
-## Pythonのインストール
-
-### pyenv
-Python は pyenv/pipenv を利用する．まずは pyenv で最新版の python をダウンロードし，pipenv をインストールする．
-
-
-最初に Git が存在していることを確認し，パッケージの更新をする．さらに Python インストールに必要なパッケージをインストールしておく．
-
-```
-git --version
-sudo apt update
-sudo apt upgrade
-sudo apt install build-essential libbz2-dev libdb-dev libreadline-dev libffi-dev libgdbm-dev liblzma-dev libncursesw5-dev libsqlite3-dev libssl-dev zlib1g-dev uuid-dev tk-dev
-```
-
-.bash_profile に次のコマンド書いておく．
-
-```
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-```
-
-Git を使い pyenv をダウンロードしたのちインストールできる Python のバージョンを確認．
-
-```
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-pyenv install --list
-```
-
-所望のバージョン番号を使って次のように Python をインストール．その後，インストールした python をデフォルトに設定する．
-
-```
-python -m pip install --upgrade pip
-pip install -r $LOCAL_SETTINGS/python/pip_standard.txt
-```
-
-### Python-lsp-server
-
-LSP 設定ファイルを所定のディレクトリにコピー
-
-```
-cp $LOCAL_SETTINGS/pycodestyle $XDG_CONFIG_HOME/
 ```
 
 ## Neovimのインストール
@@ -257,6 +211,49 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
 ```
 
 ### Python
+
+#### pyenv
+Python は pyenv/pipenv を利用する．まずは pyenv で最新版の python をダウンロードし，pipenv をインストールする．
+
+
+最初に Git が存在していることを確認し，パッケージの更新をする．さらに Python インストールに必要なパッケージをインストールしておく．
+
+```
+git --version
+sudo apt update
+sudo apt upgrade
+sudo apt install build-essential libbz2-dev libdb-dev libreadline-dev libffi-dev libgdbm-dev liblzma-dev libncursesw5-dev libsqlite3-dev libssl-dev zlib1g-dev uuid-dev tk-dev
+```
+
+.bash_profile に次のコマンド書いておく．
+
+```
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+```
+
+Git を使い pyenv をダウンロードしたのちインストールできる Python のバージョンを確認．
+
+```
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+pyenv install --list
+```
+
+所望のバージョン番号を使って次のように Python をインストール．その後，インストールした python をデフォルトに設定する．
+
+```
+python -m pip install --upgrade pip
+pip install -r $LOCAL_SETTINGS/python/pip_standard.txt
+```
+
+#### Python-lsp-server
+
+LSP 設定ファイルを所定のディレクトリにコピー
+
+```
+cp $LOCAL_SETTINGS/pycodestyle $XDG_CONFIG_HOME/
+```
 
 #### jupyter
 
@@ -630,3 +627,10 @@ Markdown をプレゼンテーションスライド形式でコンパイルす�
 ```
 npm install -g @marp-team/marp-cli
 ```
+
+### Nerd Fonts
+ターミナルのフォントを**Nerd Fonts**に属するものにするとアイコンが反映されるのでかなり便利．[Nerd Fonts 日本語公式](https://github.com/ryanoasis/nerd-fonts/blob/master/readme_ja.md)を参考にする．
+
+
+以下を使うといい．インストール方法は参考サイトなどを調べる．os側へのインストール．
+- 白源Nerd
