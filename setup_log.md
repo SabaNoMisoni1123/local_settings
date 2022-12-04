@@ -177,14 +177,22 @@ $pdf_previewer="evince";
 ```
 
 ### latex用LSPの導入
+
+#### texlab
 rust が必要．
 インストール後にパスを通す必要もあるはず．
 ```
 cargo install --git https://github.com/latex-lsp/texlab.git --locked
 ```
+#### ltex-ls
+tarファイルをダウンロードして解凍．
+[ltex-ls: releases](https://github.com/valentjn/ltex-ls/releases)
+```
+tar -xvf ./ltex-ls-[version]-linux-x64.tar.gz
+```
 
 ### パッケージインストール
-`/usr/local/texlive/texmf-local`の直下にファイルを配置して以下のコマンドを実行する．
+`/usr/local/texlive/texmf-local` の直下にファイルを配置して以下のコマンドを実行する．
 ```
 sudo mktexlsr
 ```
@@ -634,3 +642,9 @@ npm install -g @marp-team/marp-cli
 
 以下を使うといい．インストール方法は参考サイトなどを調べる．os側へのインストール．
 - 白源Nerd
+
+### efm-langserver
+[efm-langserver: releases](https://github.com/mattn/efm-langserver/releases)
+```
+tar -xvf ./efm-langserver_v[version]_linux_amd64.tar.gz
+```
