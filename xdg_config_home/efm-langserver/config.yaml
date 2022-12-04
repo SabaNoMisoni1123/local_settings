@@ -1,0 +1,11 @@
+version: 2
+root-markers:
+  - .git/
+tools:
+  textlint: &textlint
+    lint-command: 'npx textlint --format unix ${INPUT}'
+    lint-formats:
+      - '%f:%l:%n: %m'
+languages:
+  markdown:
+    - <<: *textlint
