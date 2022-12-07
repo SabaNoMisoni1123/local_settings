@@ -197,6 +197,18 @@ tar -xvf ./ltex-ls-[version]-linux-x64.tar.gz
 sudo mktexlsr
 ```
 
+### synctexの利用
+synctexを利用するには，対応のPDF veiwerが必要．
+
+#### Ubuntu
+zathuraとxdotoolが必要．
+```
+sudo apt install zathru xdotool
+```
+
+#### Mac
+skim.appが必要．また，skim側で設定をしなければならない．[参考サイト](https://htlsne.hatenablog.com/entry/2018/01/08/163552)
+
 ## 各種プログラミング言語の環境構築
 
 ### c/c++
