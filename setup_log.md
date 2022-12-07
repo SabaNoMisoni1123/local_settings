@@ -13,8 +13,9 @@
 	- javasprict
 	- julia
 	- rust
-6. VScode
-7. 各種ソフトウェア等
+6. 書類作成用の補助ソフト
+7. VScode
+8. 各種ソフトウェア等
 
 ## wsl2 の導入
 
@@ -25,7 +26,7 @@
 ここまでで十分ではあるが，クリップボード機能を有効化するために X server を導入する．まずは Windows 側で必要な処理．
 1. VcXsrv をダウンロードする．
 2. ググった結果を読んで初期設定と自動開始設定をする．
-3. ファイアウォールの設定を変更して，VcXsrv に対しての項目をすべて許可する．(Windows ファイアーウォールによるアプリケーションの許可)
+3. ファイアウォールの設定を変更して，VcXsrv に対しての項目をすべて許可する．(Windows ファイアウォールによるアプリケーションの許可)
 
 wsl2 側で必要な処理．
 1. x server 用のパッケージのインストール．
@@ -93,50 +94,11 @@ sudo apt install xclip
 
 ### jdk
 
-英文校閲用プラグインに java+8 が必要．
+英文校閲用プラグインに java+8 が必要．（削除してしまった）
 ```
 sudo apt install default-jdk unzip
 ```
 
-### textlint
-
-npm を事前にインストールすることが必要．また，設定ファイルをホームディレクトリに配置する必要がある．
-ルールの追加をした場合は，設定ファイル側にも反映させる．
-```
-sudo npm install -g textlint
-sudo npm install -g \
-    textlint-rule-preset-ja-technical-writing \
-    textlint-rule-ja-space-around-link \
-    textlint-rule-preset-ja-spacing \
-    textlint-rule-spellcheck-tech-word
-```
-
-### 英単語辞書
-
-nvim で英単語を補完するために必要．
-**look**コマンドが使えることが前提．
-辞書を以下のコマンドでインストールすればいい．
-```
-sudo apt install wamerican
-```
-
-### nextword
-高性能な英語辞書?
-次の英単語を予測するみたい．
-go が必要．
-
-
-```
-go get -u github.com/high-moctane/nextword
-
-# small
-wget https://github.com/high-moctane/nextword-data/archive/refs/tags/small.tar.gz $LOCAL_BIN/
-tar -zxvf $LOCAL_BIN/small.tar.gz
-
-# large
-wget https://github.com/high-moctane/nextword-data/archive/refs/tags/large.tar.gz $LOCAL_BIN/
-tar -zxvf $LOCAL_BIN/large.tar.gz
-```
 
 ## texlive の導入
 
@@ -487,6 +449,63 @@ LSP は npm 経由でインストールできる．
 sudo npm install -g vim-language-server
 ```
 
+
+## 書類作成用の補助ソフト
+和文，英文をnvimで書くときにあると便利な外部ツールをまとめる．
+
+### 英単語辞書
+nvim で英単語を補完するために必要．
+**look**コマンドを使えることが前提．
+辞書を以下のコマンドでインストールすればいい．
+```
+sudo apt install wamerican
+```
+
+### textlint
+npm を事前にインストールすることが必要．また，設定ファイルをホームディレクトリに配置する必要がある．
+ルールの追加をした場合は，設定ファイル側にも反映させる．
+```
+sudo npm install -g textlint
+sudo npm install -g \
+    textlint-rule-preset-ja-technical-writing \
+    textlint-rule-ja-space-around-link \
+    textlint-rule-preset-ja-spacing \
+    textlint-rule-spellcheck-tech-word
+```
+
+### efm-langserver
+textlintをLSP風に利用するためのツール．
+
+[efm-langserver: releases](https://github.com/mattn/efm-langserver/releases)
+```
+tar -xvf ./efm-langserver_v[version]_linux_amd64.tar.gz
+```
+
+### pandoc
+Markdown のコンパイルなどで使う．apt を使えば簡単にインストールできるが最新版ではない．
+```
+sudo apt install pandoc
+```
+最新版をインストールするにはちょっと面倒な方法を使う必要がある．
+```
+cd $LOCAL_BIN
+wget https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb
+sudo dpkg -i pandoc-2.19-1-amd64.deb
+```
+
+### marp cli
+Markdown をプレゼンテーションスライド形式でコンパイルする．
+```
+npm install -g @marp-team/marp-cli
+```
+
+### grammarly-languageserver
+grammalyがLSPとして公開されている．
+```
+npm install -g grammarly-languageserver
+```
+
+
 ## VScode
 Ubuntu ならば，snap を使ってインストール．
 ```
@@ -630,24 +649,6 @@ systemctl --user start grive-changes@$(systemd-escape google-drive).service
 ```
 停止は多分 stop と disable を使うと思われ．
 
-### pandoc
-Markdown のコンパイルなどで使う．apt を使えば簡単にインストールできるが最新版ではない．
-```
-sudo apt install pandoc
-```
-最新版をインストールするにはちょっと面倒な方法を使う必要がある．
-```
-cd $LOCAL_BIN
-wget https://github.com/jgm/pandoc/releases/download/2.19/pandoc-2.19-1-amd64.deb
-sudo dpkg -i pandoc-2.19-1-amd64.deb
-```
-
-### marp cli
-Markdown をプレゼンテーションスライド形式でコンパイルする．
-```
-npm install -g @marp-team/marp-cli
-```
-
 ### Nerd Fonts
 ターミナルのフォントを**Nerd Fonts**に属するものにするとアイコンが反映されるのでかなり便利．[Nerd Fonts 日本語公式](https://github.com/ryanoasis/nerd-fonts/blob/master/readme_ja.md)を参考にする．
 
@@ -655,8 +656,3 @@ npm install -g @marp-team/marp-cli
 以下を使うといい．インストール方法は参考サイトなどを調べる．os側へのインストール．
 - 白源Nerd
 
-### efm-langserver
-[efm-langserver: releases](https://github.com/mattn/efm-langserver/releases)
-```
-tar -xvf ./efm-langserver_v[version]_linux_amd64.tar.gz
-```
