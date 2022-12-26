@@ -8,7 +8,7 @@ alias slp="systemctl suspend"
 case ${OSTYPE} in
   darwin*)
     alias v="$LOCAL_BIN/nvim-macos/bin/nvim"
-    alias nvim="$LOCAL_BIN/nvim-macos/bin/nvim"
+    export PATH="$LOCAL_BIN/nvim-macos/bin:$PATH"
     ;;
   linux*)
     alias v="$LOCAL_BIN/nvim.appimage"

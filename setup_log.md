@@ -145,6 +145,7 @@ rust が必要。
 ```
 cargo install --git https://github.com/latex-lsp/texlab.git --locked
 ```
+
 #### ltex-ls
 tar ファイルをダウンロードして解凍。
 [ltex-ls: releases](https://github.com/valentjn/ltex-ls/releases)
@@ -168,7 +169,10 @@ sudo apt install zathru xdotool
 ```
 
 #### Mac
-skim.app が必要。また、skim 側で設定をしなければならない。[参考サイト](https://htlsne.hatenablog.com/entry/2018/01/08/163552)
+skim.app と neovim-remote が必要。また、skim 側で設定をしなければならない。
+
+
+[参考サイト](https://htlsne.hatenablog.com/entry/2018/01/08/163552)
 
 ## 各種プログラミング言語の環境構築
 
