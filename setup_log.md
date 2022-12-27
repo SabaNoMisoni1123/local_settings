@@ -101,6 +101,22 @@ sudo apt install xclip
 sudo apt install default-jdk unzip
 ```
 
+### VimR
+
+Mac で使える neovim の GUI アプリケーション。リリースページから圧縮ファイルをダウンロードして解凍、 `/Applications/` に移動する。
+- [VimRのレポジトリ](https://github.com/qvacua/vimr)
+- [VimRのリリースページ](https://github.com/qvacua/vimr/releases)
+
+以下の設定を追記すると、コマンドラインから利用できる。
+```
+export PATH="/Applications/VimR.app/Contents/Resources:$PATH"
+```
+
+Synctex を Skim で利用する場合は、Skim の環境設定の同期の項目で以下を設定する。
+
+- 初期値：カスタム
+- コマンド：`/Applications/VimR.app/Contents/Resources/vimr`
+- 引数：`--line %line "%file"`
 
 ## texlive の導入
 
