@@ -200,6 +200,12 @@ sudo apt install clangd-10
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
 ```
 
+clangd の設定は以下の URL を参考にする。
+
+- [設定ファイルの保存場所](https://clangd.llvm.org/config#files)
+- [設定ファイルの書式](https://clangd.llvm.org/config#compileflags)
+- [Clangd を -std=c++20 で動作させる設定](https://stackoverflow.com/questions/73758291/is-there-a-way-to-specify-the-c-standard-of-clangd-without-recompiling-it)
+
 gcc/g++のバージョンが古い場合は以下の手順。これによりいくつかのバージョンをインストールできる。
 ```
 sudo apt install gcc-7 gcc-8 gcc-9 g++-7 g++-8 g++-9
