@@ -588,6 +588,14 @@ mac だと brew で簡単にインストールできる。
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 ```
 
+### ripgrep
+nvim のいくつかのプラグインで利用している。各種パケージマネージャーで簡単にインストールできる。
+
+```
+sudo apt install ripgrep    # ubuntu
+brew install ripgrep        # mac
+```
+
 ### docker
 
 #### wsl2 / mac
