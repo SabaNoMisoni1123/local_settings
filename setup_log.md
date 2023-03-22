@@ -687,3 +687,58 @@ systemctl --user start grive-changes@$(systemd-escape google-drive).service
 以下を使うといい。インストール方法は参考サイトなどを調べる。os 側へのインストール。
 - 白源 Nerd
 
+### LSP一覧
+
+- clangd (c/cpp)
+  ```
+  sudo apt install clang
+  sudo apt install clangd-10
+  sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
+  ```
+- python-lsp-server (python)
+  ```
+  pip install python-lsp-server[all] python-lsp-black pyls-isort
+  ```
+- rust-analyzer (rust)
+  ```
+  curl -OL https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > $LOCAL_BIN/rust-analyzer
+  chmod +x ~/.local/bin/rust-analyzer
+  ```
+- typescript-language-server (typescript/javasprict)
+  ```
+  npm install -g  typescript-language-server typescript
+  ```
+- vue-language-server (vuejs)
+  ```
+  npm install -g @volar/vue-language-server
+  ```
+- lua-language-server (lua)
+  圧縮ファイルをダウンロードして解凍する。
+  [リリースページ](https://github.com/LuaLS/lua-language-server/releases)
+- vim-language-server (vimscript)
+  ```
+  npm install -g vim-language-server
+  ```
+- texlab (latex)
+  ```
+  cargo install --git https://github.com/latex-lsp/texlab.git --locked
+  ```
+  コンパイル済みバイナリをダウンロードする方法がある。
+  [リリースページ](https://github.com/latex-lsp/texlab/releases)
+- ltex-ls (latex)
+  圧縮ファイルをダウンロードして解凍する。
+  [ltex-ls: releases](https://github.com/valentjn/ltex-ls/releases)
+  ```
+  tar -xvf ./ltex-ls-[version]-linux-x64.tar.gz
+  ```
+- grammarly-languageserver (grammarly)
+  ```
+  npm install -g grammarly-languageserver
+  ```
+- vscode-json-language-server (json)
+  ```
+  npm install -g vscode-langservers-extracted
+  ```
+- efm-langserver (efm)
+  コンパイル済みバイナリをダウンロードする。
+  [リリースページ](https://github.com/mattn/efm-langserver/releases)
