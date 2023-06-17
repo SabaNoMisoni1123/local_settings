@@ -73,5 +73,68 @@
     },
     "editor.wordWrap": "on",
     "workbench.editor.enablePreview": false,
-    "editor.folding": false
+    "editor.folding": false,
+
+
+    "vim.vimrc.enable": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<space>", "l", "f"],
+            "commands": ["editor.action.formatDocument"],
+            "silent": true,
+        },
+        {
+            "before": ["<space>", "l", "c"],
+            "commands": ["editor.action.revealDeclaration"],
+            "silent": true,
+        },
+        {
+            "before": ["<space>", "l", "d"],
+            "commands": ["editor.action.revealDefinition"],
+            "silent": true,
+        },
+        {
+            "before": ["<space>", "l", "h"],
+            "commands": ["editor.action.showHover"],
+            "silent": true,
+        },
+        {
+            "before": ["<space>", "l", "i"],
+            "commands": ["editor.action.referenceSearch.trigger"],
+            "silent": true,
+        },
+        {
+            "before": ["<space>", "l", "t"],
+            "commands": ["editor.action.toggleEditType"],
+            "silent": true,
+        },
+        {
+            "before": ["<space>", "l", "r"],
+            "commands": ["editor.action.rename"],
+            "silent": true,
+        },
+        {
+            "before": ["<space>", "l", "s"],
+            "commands": ["editor.action.gotoSymbol"],
+            "silent": true,
+        },
+        {
+            "before": ["<space>", "l", "S"],
+            "commands": ["editor.action.triggerParamenterHint"],
+            "silent": true,
+        },
+        {
+            "before": ["c", "<space>", "c"],
+            "commands": ["editor.action.commentLine"],
+            "silent": true,
+        },
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["c", "<space>", "c"],
+            "commands": ["editor.action.blockComment"],
+            "silent": true,
+        },
+    ]
+
 }
