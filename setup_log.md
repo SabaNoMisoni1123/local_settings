@@ -537,7 +537,10 @@ sudo npm install -g \
     textlint-rule-preset-ja-technical-writing \
     textlint-rule-ja-space-around-link \
     textlint-rule-preset-ja-spacing \
-    textlint-rule-spellcheck-tech-word
+    textlint-rule-spellcheck-tech-word \
+    textlint-rule-prh \ 
+    @textlint-ja/textlint-rule-morpheme-match \
+    github:SabaNoMisoni1123/textlint-rule-ja-official-documents
 ```
 
 ### efm-langserver
