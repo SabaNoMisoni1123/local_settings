@@ -213,6 +213,15 @@ skim.app と neovim-remote が必要。また、skim 側で設定をしなけれ
 
 ## 各種プログラミング言語の環境構築
 
+### codex
+
+npmプラグインをインストールして起動。ブラウザからChat GPTにログイン。
+
+``` shell
+npm install -g @openai/codex
+codex
+```
+
 ### c/c++
 
 clang、clangd は以下の方法でインストール。
